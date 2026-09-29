@@ -1,0 +1,88 @@
+{
+    "employees": [
+      {
+        "employee_id": "E-1001",
+        "name": "Amina Cole",
+        "role": "employee",
+        "hire_date": "2022-03-01",
+        "department": "Engineering"
+      },
+      {
+        "employee_id": "E-1002",
+        "name": "Ben Ortiz",
+        "role": "employee",
+        "hire_date": "2020-01-10",
+        "department": "Engineering"
+      },
+      {
+        "employee_id": "E-1003",
+        "name": "Priya Shah",
+        "role": "manager",
+        "hire_date": "2019-06-01",
+        "department": "Product"
+      },
+      {
+        "employee_id": "E-1004",
+        "name": "Chris Ng",
+        "role": "manager",
+        "hire_date": "2018-01-15",
+        "department": "Sales"
+      },
+      {
+        "employee_id": "E-1005",
+        "name": "Jordan Lee",
+        "role": "employee",
+        "hire_date": "2026-08-15",
+        "department": "Engineering"
+      },
+      {
+        "employee_id": "E-1006",
+        "name": "Sam Rivera",
+        "role": "employee",
+        "hire_date": "2021-09-01",
+        "department": "Support"
+      },
+      {
+        "employee_id": "E-1007",
+        "name": "Taylor Brooks",
+        "role": "employee",
+        "hire_date": "2019-04-12",
+        "department": "Engineering"
+      },
+      {
+        "employee_id": "E-1008",
+        "name": "Riley Chen",
+        "role": "employee",
+        "hire_date": "2020-11-02",
+        "department": "Design"
+      },
+      {
+        "employee_id": "E-1009",
+        "name": "Morgan Diaz",
+        "role": "contractor",
+        "hire_date": "2024-02-01",
+        "department": "Engineering"
+      },
+      {
+        "employee_id": "E-1010",
+        "name": "Alex Kim",
+        "role": "employee",
+        "hire_date": "2017-05-20",
+        "department": "Finance"
+      },
+      {
+        "employee_id": "E-1011",
+        "name": "Casey Dupree",
+        "role": "employee",
+        "hire_date": "2021-01-08",
+        "department": "HR"
+      },
+      {
+        "employee_id": "E-1011",
+        "name": "Casey Dupree (duplicate record)",
+        "role": "employee",
+        "hire_date": "2021-01-08",
+        "department": "HR"
+      }
+    ]
+  }
