@@ -1,5 +1,7 @@
-"""Unit tests for employee lookup. Fixtures live in tests/mock_data/, copied per test."""
+"""Unit tests for python functions used as MCP tools
 
+Fixtures live in tests/mock_data/ and are copied into tmp_path per test.
+"""
 from __future__ import annotations
 
 import shutil
@@ -8,19 +10,20 @@ from pathlib import Path
 import pytest
 
 from store.json import JsonStore
-from tools import get_employee_info
+from tools import get_employee_info, get_policy_limits
 
 _MOCK_DIR = Path(__file__).parent / "mock_data"
 
 
 @pytest.fixture(autouse=True)
 def employee_data(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> Path:
-    """Copy mock JSON into tmp_path and bind tools.staff / tools.inventory."""
+    """Copy mock JSON into tmp_path and bind staff, inventory, and policies stores."""
     shutil.copytree(_MOCK_DIR, tmp_path, dirs_exist_ok=True)
     monkeypatch.setattr("tools.staff", JsonStore(tmp_path / "staff.json"))
     monkeypatch.setattr(
         "tools.inventory", JsonStore(tmp_path / "inventory.json")
     )
+    monkeypatch.setattr("tools.policies", JsonStore(tmp_path / "policy_limits.json"))
     return tmp_path
 
 
@@ -87,3 +90,90 @@ def test_missing_assignments_key_raises(tmp_path: Path) -> None:
 
     with pytest.raises(KeyError):
         get_employee_info("E-1")
+
+
+def test_employee_limits_include_happy_path_and_edges() -> None:
+    result = get_policy_limits("employee")
+
+    assert result["role"] == "employee"
+    rules = [row["policy_rule"] for row in result["limits"] if "policy_rule" in row]
+    assert "R-EMP-MON" in rules
+    assert "R-EMP-MON-DUP" in rules
+    assert "R-EMP-LAP" in rules
+    assert "R-EMP-GPU" in rules
+    assert "R-EMP-MOU-CASE" not in rules
+    assert all(row["role"] == "employee" for row in result["limits"])
+
+
+def test_employee_monitor_duplicate_rows() -> None:
+    result = get_policy_limits("employee")
+    monitors = [row for row in result["limits"] if row["category"] == "monitor"]
+
+    assert len(monitors) == 2
+    assert {row["policy_rule"] for row in monitors} == {
+        "R-EMP-MON",
+        "R-EMP-MON-DUP",
+    }
+
+
+def test_employee_incomplete_keyboard_row() -> None:
+    result = get_policy_limits("employee")
+    keyboards = [row for row in result["limits"] if row["category"] == "keyboard"]
+
+    assert len(keyboards) == 1
+    assert keyboards[0]["cap_active"] == 1
+    assert "refresh_years" not in keyboards[0]
+    assert "policy_rule" not in keyboards[0]
+
+
+def test_employee_has_no_dock_row() -> None:
+    result = get_policy_limits("employee")
+    docks = [row for row in result["limits"] if row.get("category") == "dock"]
+
+    assert docks == []
+
+
+def test_manager_monitor_cap_differs_from_employee() -> None:
+    employee = get_policy_limits("employee")
+    manager = get_policy_limits("manager")
+
+    emp_mon = next(r for r in employee["limits"] if r["policy_rule"] == "R-EMP-MON")
+    mgr_mon = next(r for r in manager["limits"] if r["policy_rule"] == "R-MGR-MON")
+    mgr_lap = next(r for r in manager["limits"] if r["policy_rule"] == "R-MGR-LAP")
+
+    assert emp_mon["cap_active"] == 1
+    assert mgr_mon["cap_active"] == 2
+    assert mgr_lap["refresh_years"] == 2
+    assert len(manager["limits"]) == 2
+
+
+def test_contractor_has_no_limits() -> None:
+    result = get_policy_limits("contractor")
+
+    assert result["role"] == "contractor"
+    assert result["limits"] == []
+
+
+def test_intern_is_not_a_covered_role_but_has_a_row() -> None:
+    result = get_policy_limits("intern")
+
+    assert len(result["limits"]) == 1
+    assert result["limits"][0]["policy_rule"] == "R-INT-HEAD"
+
+
+def test_capitalized_employee_role_is_a_different_key() -> None:
+    lower = get_policy_limits("employee")
+    upper = get_policy_limits("Employee")
+
+    assert "R-EMP-MOU-CASE" not in [
+        row.get("policy_rule") for row in lower["limits"]
+    ]
+    assert len(upper["limits"]) == 1
+    assert upper["limits"][0]["policy_rule"] == "R-EMP-MOU-CASE"
+
+
+def test_missing_limits_key_raises(tmp_path: Path) -> None:
+    (tmp_path / "policy_limits.json").write_text("{}")
+
+    with pytest.raises(KeyError):
+        get_policy_limits("employee")

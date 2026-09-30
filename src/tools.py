@@ -1,4 +1,4 @@
-"""Load mock fixtures and look up an employee with their equipment."""
+"""Python functions used by the MCP tools."""
 
 from pathlib import Path
 from typing import Any
@@ -31,7 +31,7 @@ def get_employee_info(employee_id: str) -> list[dict[str, Any]]:
 
 
 def get_policy_limits(role: str) -> dict[str, Any]:
-    """Return new-hire rules and per-category caps/refresh windows for ``role``.
+    """Return per-category caps and refresh windows for ``role``.
     Unknown roles yield ``limits: []``.
     """
     payload = policies.load()
