@@ -17,7 +17,7 @@ _MOCK_DIR = Path(__file__).parent / "mock_data"
 def employee_data(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> Path:
     """Copy mock JSON into tmp_path and bind tools.staff / tools.inventory."""
     shutil.copytree(_MOCK_DIR, tmp_path, dirs_exist_ok=True)
-    monkeypatch.setattr("tools.staff", JsonStore(tmp_path / "employees.json"))
+    monkeypatch.setattr("tools.staff", JsonStore(tmp_path / "staff.json"))
     monkeypatch.setattr(
         "tools.inventory", JsonStore(tmp_path / "inventory.json")
     )

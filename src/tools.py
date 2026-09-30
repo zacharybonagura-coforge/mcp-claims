@@ -8,13 +8,13 @@ from store.json import JsonStore
 
 _DATA = Path(__file__).resolve().parents[1] / "data"
 
-staff: Store = JsonStore(_DATA / "employees.json")
+staff: Store = JsonStore(_DATA / "staff.json")
 inventory: Store = JsonStore(_DATA / "inventory.json")
 
 
 def get_employee_info(employee_id: str) -> list[dict[str, Any]]:
-    """Return every employee row for ``employee_id``, with equipment attached."""
-    employees = staff.load()["employees"]
+    """Return role, hire_date, and equipment for this employee id."""
+    employees = staff.load()["staff"]
     assignments = inventory.load()["assignments"]
 
     equipment: list[dict[str, Any]] = []
