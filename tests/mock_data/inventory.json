@@ -1,0 +1,34 @@
+{
+    "assignments": [
+      {
+        "assignment_id": "A-1",
+        "employee_id": "E-1",
+        "category": "monitor",
+        "status": "active",
+        "assigned_on": "2025-01-10",
+        "asset_tag": "MON-1"
+      },
+      {
+        "assignment_id": "A-2",
+        "employee_id": "E-1",
+        "category": "laptop",
+        "status": "active",
+        "assigned_on": "2024-03-01",
+        "asset_tag": "LAP-1"
+      },
+      {
+        "assignment_id": "A-3",
+        "employee_id": "E-INCOMPLETE",
+        "category": "laptop",
+        "status": "active",
+        "asset_tag": "LAP-X"
+      },
+      {
+        "assignment_id": "A-4",
+        "employee_id": "E-INCOMPLETE",
+        "category": "keyboard",
+        "assigned_on": "2022-01-01",
+        "asset_tag": "KBD-X"
+      }
+    ]
+  }
