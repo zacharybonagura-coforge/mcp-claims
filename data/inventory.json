@@ -1,98 +1,98 @@
 {
-    "assignments": [
-      {
-        "assignment_id": "A-001",
-        "employee_id": "E-1001",
-        "category": "monitor",
-        "status": "active",
-        "assigned_on": "2025-01-10",
-        "asset_tag": "MON-4401"
-      },
-      {
-        "assignment_id": "A-002",
-        "employee_id": "E-1001",
-        "category": "laptop",
-        "status": "active",
-        "assigned_on": "2024-03-01",
-        "asset_tag": "LAP-2201"
-      },
-      {
-        "assignment_id": "A-003",
-        "employee_id": "E-1002",
-        "category": "laptop",
-        "status": "active",
-        "assigned_on": "2021-06-01",
-        "asset_tag": "LAP-1802"
-      },
-      {
-        "assignment_id": "A-004",
-        "employee_id": "E-1002",
-        "category": "dock",
-        "status": "active",
-        "assigned_on": "2021-06-01",
-        "asset_tag": "DOCK-1802"
-      },
-      {
-        "assignment_id": "A-005",
-        "employee_id": "E-1003",
-        "category": "monitor",
-        "status": "active",
-        "assigned_on": "2025-02-01",
-        "asset_tag": "MON-5103"
-      },
-      {
-        "assignment_id": "A-006",
-        "employee_id": "E-1003",
-        "category": "laptop",
-        "status": "active",
-        "assigned_on": "2023-08-01",
-        "asset_tag": "LAP-4103"
-      },
-      {
-        "assignment_id": "A-007",
-        "employee_id": "E-1004",
-        "category": "monitor",
-        "status": "active",
-        "assigned_on": "2024-01-15",
-        "asset_tag": "MON-6104A"
-      },
-      {
-        "assignment_id": "A-008",
-        "employee_id": "E-1004",
-        "category": "monitor",
-        "status": "active",
-        "assigned_on": "2025-06-01",
-        "asset_tag": "MON-6104B"
-      },
-      {
-        "assignment_id": "A-009",
-        "employee_id": "E-1006",
-        "category": "monitor",
-        "status": "retired",
-        "assigned_on": "2021-09-15",
-        "asset_tag": "MON-9906"
-      },
-      {
-        "assignment_id": "A-010",
-        "employee_id": "E-1007",
-        "category": "headset",
-        "status": "active",
-        "assigned_on": "2025-10-01",
-        "asset_tag": "HS-1007"
-      },
-      {
-        "assignment_id": "A-011",
-        "employee_id": "E-1008",
-        "category": "laptop",
-        "status": "active",
-        "asset_tag": "LAP-1008"
-      },
-      {
-        "assignment_id": "A-012",
-        "employee_id": "E-1010",
-        "category": "keyboard",
-        "assigned_on": "2022-01-01",
-        "asset_tag": "KBD-1010"
-      }
-    ]
-  }
+  "assignments": [
+    {
+      "assignment_id": "A-001",
+      "employee_id": "E-1001",
+      "category": "monitor",
+      "status": "active",
+      "assigned_on": "2025-01-10",
+      "asset_tag": "MON-4401"
+    },
+    {
+      "assignment_id": "A-002",
+      "employee_id": "E-1001",
+      "category": "laptop",
+      "status": "active",
+      "assigned_on": "2024-03-01",
+      "asset_tag": "LAP-2201"
+    },
+    {
+      "assignment_id": "A-003",
+      "employee_id": "E-1002",
+      "category": "laptop",
+      "status": "active",
+      "assigned_on": "2021-06-01",
+      "asset_tag": "LAP-1802"
+    },
+    {
+      "assignment_id": "A-004",
+      "employee_id": "E-1002",
+      "category": "dock",
+      "status": "active",
+      "assigned_on": "2021-06-01",
+      "asset_tag": "DOCK-1802"
+    },
+    {
+      "assignment_id": "A-005",
+      "employee_id": "E-1003",
+      "category": "monitor",
+      "status": "active",
+      "assigned_on": "2025-02-01",
+      "asset_tag": "MON-5103"
+    },
+    {
+      "assignment_id": "A-006",
+      "employee_id": "E-1003",
+      "category": "laptop",
+      "status": "active",
+      "assigned_on": "2023-08-01",
+      "asset_tag": "LAP-4103"
+    },
+    {
+      "assignment_id": "A-007",
+      "employee_id": "E-1004",
+      "category": "monitor",
+      "status": "active",
+      "assigned_on": "2024-01-15",
+      "asset_tag": "MON-6104A"
+    },
+    {
+      "assignment_id": "A-008",
+      "employee_id": "E-1004",
+      "category": "monitor",
+      "status": "active",
+      "assigned_on": "2025-06-01",
+      "asset_tag": "MON-6104B"
+    },
+    {
+      "assignment_id": "A-009",
+      "employee_id": "E-1006",
+      "category": "monitor",
+      "status": "retired",
+      "assigned_on": "2021-09-15",
+      "asset_tag": "MON-9906"
+    },
+    {
+      "assignment_id": "A-010",
+      "employee_id": "E-1007",
+      "category": "headset",
+      "status": "active",
+      "assigned_on": "2025-10-01",
+      "asset_tag": "HS-1007"
+    },
+    {
+      "assignment_id": "A-011",
+      "employee_id": "E-1008",
+      "category": "laptop",
+      "status": "active",
+      "asset_tag": "LAP-1008"
+    },
+    {
+      "assignment_id": "A-012",
+      "employee_id": "E-1010",
+      "category": "keyboard",
+      "assigned_on": "2022-01-01",
+      "asset_tag": "KBD-1010"
+    }
+  ]
+}
