@@ -6,8 +6,10 @@ import json
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-GOLDEN = ROOT / "data" / "golden" / "golden.json"
+from config import Settings
+
+settings = Settings.from_env()
+GOLDEN = settings.golden_path
 
 
 def react_steps(row: dict) -> list[dict]:
@@ -184,7 +186,9 @@ def main() -> None:
         sys.exit(2)
     path = Path(sys.argv[1])
     if not path.is_file():
-        path = ROOT / path
+        print("Path does not exist")
+        return
+        
     report = score_run(path)
     print(json.dumps(report, indent=2))
     print(
