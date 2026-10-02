@@ -1,0 +1,27 @@
+{
+    "react_tool_order": [
+      "get_employee_info",
+      "get_policy_limits",
+      "check_request_eligibility"
+    ],
+    "react_steps": 4,
+    "max_steps": false,
+    "expected_reflect_changed": false,
+    "cases": [
+      {"label": "allow-manager-second-monitor", "employee_id": "E-1003", "item": "second monitor", "reason": "need an extra screen for design reviews", "expected": "allow", "expected_eligible": true, "expected_detail": "under cap", "expected_flagged": false},
+      {"label": "allow-new-hire-laptop", "employee_id": "E-1005", "item": "laptop", "reason": "starting Monday, need a laptop", "expected": "allow", "expected_eligible": true, "expected_detail": "under cap", "expected_flagged": false},
+      {"label": "allow-retired-monitor", "employee_id": "E-1006", "item": "monitor", "reason": "old panel is retired, need one on the desk", "expected": "allow", "expected_eligible": true, "expected_detail": "under cap", "expected_flagged": false},
+      {"label": "allow-laptop-refresh-due", "employee_id": "E-1002", "item": "laptop", "reason": "current laptop is past refresh", "expected": "allow", "expected_eligible": true, "expected_detail": "due for refresh", "expected_flagged": false},
+      {"label": "allow-first-monitor", "employee_id": "E-1002", "item": "monitor", "reason": "no external display on file", "expected": "allow", "expected_eligible": true, "expected_detail": "under cap", "expected_flagged": false},
+      {"label": "deny-employee-second-monitor", "employee_id": "E-1001", "item": "second monitor", "reason": "need an extra screen for design work", "expected": "deny", "expected_eligible": false, "expected_detail": "refresh window", "expected_flagged": false},
+      {"label": "deny-laptop-too-new", "employee_id": "E-1001", "item": "laptop", "reason": "want a newer laptop", "expected": "deny", "expected_eligible": false, "expected_detail": "refresh window", "expected_flagged": false},
+      {"label": "deny-headset-too-new", "employee_id": "E-1007", "item": "headset", "reason": "want a nicer headset", "expected": "deny", "expected_eligible": false, "expected_detail": "refresh window", "expected_flagged": false},
+      {"label": "deny-manager-at-monitor-cap", "employee_id": "E-1004", "item": "third monitor", "reason": "want another screen", "expected": "deny", "expected_eligible": false, "expected_detail": "refresh window", "expected_flagged": false},
+      {"label": "deny-second-laptop-too-new", "employee_id": "E-1001", "item": "second laptop", "reason": "need a travel laptop", "expected": "deny", "expected_eligible": false, "expected_detail": "refresh window", "expected_flagged": false},
+      {"label": "escalate-duplicate-id", "employee_id": "E-1011", "item": "laptop", "reason": "current laptop is slow", "expected": "escalate", "expected_eligible": null, "expected_detail": "duplicate identity", "expected_flagged": true},
+      {"label": "escalate-unknown-id", "employee_id": "E-9999", "item": "laptop", "reason": "new hire kit", "expected": "escalate", "expected_eligible": null, "expected_detail": "identity is unknown", "expected_flagged": true},
+      {"label": "escalate-unmapped-gpu", "employee_id": "E-1002", "item": "GPU", "reason": "video work", "expected": "escalate", "expected_eligible": null, "expected_detail": "unmapped item", "expected_flagged": true},
+      {"label": "escalate-incomplete-status", "employee_id": "E-1010", "item": "keyboard", "reason": "keys sticking", "expected": "escalate", "expected_eligible": null, "expected_detail": "has no status", "expected_flagged": true},
+      {"label": "escalate-mixed", "employee_id": "E-1001", "item": "laptop and monitor", "reason": "refresh both", "expected": "escalate", "expected_eligible": null, "expected_detail": "mixed request", "expected_flagged": true}
+    ]
+  }
