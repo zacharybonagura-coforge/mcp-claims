@@ -445,3 +445,15 @@ def test_flag_extra_field_on_existing_ticket_raises(tmp_path: Path) -> None:
 
     with pytest.raises(ValidationError):
         flag_for_human_review("E-1", "laptop", "identity")
+
+
+def test_eligibility_skips_retired_unit_with_no_assigned_on() -> None:
+    result = check_request_eligibility("E-SKIP-DATE", "monitor")
+
+    assert result["eligible"] is False
+    assert result["detail"] == (
+        "employee monitor is at cap (1/1); oldest unit assigned 2025-01-10 "
+        "is still inside the 3-year refresh window"
+    )
+    assert result["active"] == 1
+    assert result["cap_active"] == 1

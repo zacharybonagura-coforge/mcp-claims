@@ -62,6 +62,13 @@
       "role": "employee",
       "hire_date": "2021-01-01",
       "department": "Design"
+    },
+    {
+      "employee_id": "E-SKIP-DATE",
+      "name": "Lee",
+      "role": "employee",
+      "hire_date": "2020-01-01",
+      "department": "Support"
     }
   ]
 }

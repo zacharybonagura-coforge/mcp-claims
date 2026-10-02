@@ -237,7 +237,7 @@ def check_request_eligibility(employee_id: str, item: str) -> dict[str, Any]:
 
     # Refresh age is unknown if any matching unit has no assigned_on.
     for unit in matching_equipment:
-        if unit.assigned_on is None:
+        if unit.status == "active" and unit.assigned_on is None:
             return {
                 "employee_id": employee_id,
                 "item": item,

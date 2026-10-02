@@ -61,6 +61,21 @@
       "status": "active",
       "assigned_on": "2018-01-01",
       "asset_tag": "KBD-1"
+    },
+    {
+      "assignment_id": "A-9",
+      "employee_id": "E-SKIP-DATE",
+      "category": "monitor",
+      "status": "active",
+      "assigned_on": "2025-01-10",
+      "asset_tag": "MON-DATED"
+    },
+    {
+      "assignment_id": "A-10",
+      "employee_id": "E-SKIP-DATE",
+      "category": "monitor",
+      "status": "retired",
+      "asset_tag": "MON-NODATE"
     }
   ]
 }
