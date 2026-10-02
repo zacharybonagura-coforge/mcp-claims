@@ -41,6 +41,27 @@
       "role": "contractor",
       "hire_date": "2024-02-01",
       "department": "Engineering"
+    },
+    {
+      "employee_id": "E-REFRESH",
+      "name": "Old Kit",
+      "role": "employee",
+      "hire_date": "2015-01-01",
+      "department": "Engineering"
+    },
+    {
+      "employee_id": "E-RETIRED",
+      "name": "Pat",
+      "role": "employee",
+      "hire_date": "2020-01-01",
+      "department": "Support"
+    },
+    {
+      "employee_id": "E-KBD",
+      "name": "Kim",
+      "role": "employee",
+      "hire_date": "2021-01-01",
+      "department": "Design"
     }
   ]
 }

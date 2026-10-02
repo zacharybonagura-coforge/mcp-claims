@@ -29,6 +29,38 @@
       "category": "keyboard",
       "assigned_on": "2022-01-01",
       "asset_tag": "KBD-X"
+    },
+    {
+      "assignment_id": "A-5",
+      "employee_id": "E-REFRESH",
+      "category": "laptop",
+      "status": "active",
+      "assigned_on": "2018-03-01",
+      "asset_tag": "LAP-OLD"
+    },
+    {
+      "assignment_id": "A-6",
+      "employee_id": "E-REFRESH",
+      "category": "laptop",
+      "status": "active",
+      "assigned_on": "2025-01-01",
+      "asset_tag": "LAP-NEWER"
+    },
+    {
+      "assignment_id": "A-7",
+      "employee_id": "E-RETIRED",
+      "category": "monitor",
+      "status": "retired",
+      "assigned_on": "2021-09-15",
+      "asset_tag": "MON-RET"
+    },
+    {
+      "assignment_id": "A-8",
+      "employee_id": "E-KBD",
+      "category": "keyboard",
+      "status": "active",
+      "assigned_on": "2018-01-01",
+      "asset_tag": "KBD-1"
     }
   ]
 }

@@ -10,7 +10,11 @@ from pathlib import Path
 import pytest
 
 from store.json import JsonStore
-from tools import get_employee_info, get_policy_limits
+from tools import (
+    get_employee_info,
+    get_policy_limits,
+    check_request_eligibility
+)
 
 _MOCK_DIR = Path(__file__).parent / "mock_data"
 
@@ -177,3 +181,158 @@ def test_missing_limits_key_raises(tmp_path: Path) -> None:
 
     with pytest.raises(KeyError):
         get_policy_limits("employee")
+
+
+def test_eligibility_under_cap_is_eligible() -> None:
+    result = check_request_eligibility("E-2", "27 inch Monitor")
+
+    assert result["eligible"] is True
+    assert result["detail"] == "within_cap"
+    assert result["category"] == "monitor"
+    assert result["policy_rule"] == "R-MGR-MON"
+    assert result["active"] == 0
+    assert result["cap_active"] == 2
+
+
+def test_eligibility_open_keyboard_slot() -> None:
+    result = check_request_eligibility("E-1", "keyboard")
+
+    assert result["eligible"] is True
+    assert result["detail"] == "within_cap"
+    assert result["category"] == "keyboard"
+    assert result["policy_rule"] is None
+    assert result["active"] == 0
+    assert result["cap_active"] == 1
+
+
+def test_eligibility_refresh_due_replaces_oldest_unit() -> None:
+    result = check_request_eligibility("E-REFRESH", "laptop")
+
+    assert result["eligible"] is True
+    assert result["detail"] == "refresh_ok"
+    assert result["policy_rule"] == "R-EMP-LAP"
+    assert result["active"] == 2
+    assert result["cap_active"] == 1
+    assert result["replace_unit"]["asset_tag"] == "LAP-OLD"
+
+
+def test_eligibility_retired_unit_does_not_count_toward_cap() -> None:
+    result = check_request_eligibility("E-RETIRED", "monitor")
+
+    assert result["eligible"] is True
+    assert result["detail"] == "within_cap"
+    assert result["active"] == 0
+    assert result["cap_active"] == 1
+
+
+def test_eligibility_at_cap_and_too_new_is_not_eligible() -> None:
+    result = check_request_eligibility("E-1", "monitor")
+
+    assert result["eligible"] is False
+    assert result["detail"] == "refresh_too_soon"
+    assert result["policy_rule"] == "R-EMP-MON"
+    assert result["active"] == 1
+    assert result["cap_active"] == 1
+    assert "replace_unit" not in result
+
+
+def test_eligibility_uses_first_duplicate_policy_row() -> None:
+    result = check_request_eligibility("E-1", "monitor")
+
+    assert result["policy_rule"] == "R-EMP-MON"
+
+
+def test_eligibility_no_refresh_window_at_cap_is_not_eligible() -> None:
+    result = check_request_eligibility("E-KBD", "keyboard")
+
+    assert result["eligible"] is False
+    assert result["detail"] == "refresh_too_soon"
+    assert result["policy_rule"] is None
+
+
+def test_eligibility_unknown_employee_is_identity() -> None:
+    result = check_request_eligibility("E-9999", "laptop")
+
+    assert result["eligible"] is None
+    assert result["detail"] == "identity"
+
+
+def test_eligibility_duplicate_employee_is_identity() -> None:
+    result = check_request_eligibility("E-DUP", "laptop")
+
+    assert result["eligible"] is None
+    assert result["detail"] == "identity"
+
+
+def test_eligibility_unmapped_item() -> None:
+    result = check_request_eligibility("E-1", "gpu")
+
+    assert result["eligible"] is None
+    assert result["detail"] == "unmapped_item"
+    assert "category" not in result
+
+
+def test_eligibility_mixed_items_is_decline() -> None:
+    result = check_request_eligibility("E-1", "laptop and monitor")
+
+    assert result["eligible"] is False
+    assert result["detail"] == "mixed_items"
+
+
+def test_eligibility_contractor_has_policy_gap() -> None:
+    result = check_request_eligibility("E-CONTRACTOR", "monitor")
+
+    assert result["eligible"] is None
+    assert result["detail"] == "policy_gap"
+    assert result["category"] == "monitor"
+
+
+def test_eligibility_employee_dock_is_policy_gap() -> None:
+    result = check_request_eligibility("E-1", "dock")
+
+    assert result["eligible"] is None
+    assert result["detail"] == "policy_gap"
+
+
+def test_eligibility_missing_status_is_incomplete() -> None:
+    result = check_request_eligibility("E-INCOMPLETE", "keyboard")
+
+    assert result["eligible"] is None
+    assert result["detail"] == "incomplete_inventory"
+    assert result["policy_rule"] is None
+
+
+def test_eligibility_missing_assigned_on_is_incomplete() -> None:
+    result = check_request_eligibility("E-INCOMPLETE", "laptop")
+
+    assert result["eligible"] is None
+    assert result["detail"] == "incomplete_inventory"
+    assert result["policy_rule"] == "R-EMP-LAP"
+    assert result["active"] == 1
+    assert result["cap_active"] == 1
+
+
+def test_eligibility_ignores_incomplete_units_in_other_categories() -> None:
+    result = check_request_eligibility("E-INCOMPLETE", "monitor")
+
+    assert result["eligible"] is True
+    assert result["detail"] == "within_cap"
+
+
+def test_eligibility_parse_error_is_ineligible(tmp_path: Path) -> None:
+    (tmp_path / "staff.json").write_text(
+        '{"staff":[{"employee_id":"E-1","name":"Ada","role":"employee",'
+        '"hire_date":"2022-03-01","department":"Engineering","notes":"nope"}]}'
+    )
+
+    result = check_request_eligibility("E-1", "laptop")
+
+    assert result["eligible"] is False
+    assert result["detail"] == "parse_error"
+
+
+def test_eligibility_missing_staff_key_still_raises(tmp_path: Path) -> None:
+    (tmp_path / "staff.json").write_text("{}")
+
+    with pytest.raises(KeyError):
+        check_request_eligibility("E-1", "laptop")
