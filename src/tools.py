@@ -6,7 +6,7 @@ from typing import Any
 
 from pydantic import ValidationError
 
-from models import Assignment, PolicyLimit, ReviewTicket, Staff
+from models import Assignment, PolicyLimit, ReviewStatus, ReviewTicket, Staff
 from store.base import Store
 from store.json import JsonStore
 
@@ -285,6 +285,7 @@ def flag_for_human_review(
         employee_id=employee_id,
         request=request,
         reason=reason,
+        status=ReviewStatus.OPEN
     )
     tickets.append(ticket)
 

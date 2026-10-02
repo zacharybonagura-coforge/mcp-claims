@@ -1,4 +1,5 @@
 from datetime import date
+from enum import StrEnum
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -35,8 +36,14 @@ class PolicyLimit(TableModel):
     policy_rule: str | None = None
 
 
+class ReviewStatus(StrEnum):
+    OPEN = "open"
+    IN_PROGRESS = "in_progress"
+    CLOSED = "closed"
+
 class ReviewTicket(TableModel):
     review_ticket_id: str
     employee_id: str
     request: str
     reason: str
+    status: ReviewStatus = ReviewStatus.OPEN

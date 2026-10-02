@@ -10,6 +10,7 @@ from pathlib import Path
 import pytest
 from pydantic import ValidationError
 
+from models import ReviewStatus
 from store.json import JsonStore
 from tools import (
     check_request_eligibility,
@@ -352,6 +353,7 @@ def test_flag_first_ticket_is_persisted(tmp_path: Path) -> None:
             "employee_id": "E-1",
             "request": "second monitor",
             "reason": "identity",
+            "status": ReviewStatus.OPEN
         }
     ]
 
