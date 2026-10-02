@@ -1,16 +1,17 @@
 """Python functions used by the MCP tools."""
 
 from datetime import UTC, datetime
-from pathlib import Path
 from typing import Any
 
 from pydantic import ValidationError
 
+from config import Settings
 from models import Assignment, PolicyLimit, ReviewStatus, ReviewTicket, Staff
 from store.base import Store
 from store.json import JsonStore
 
-_DATA = Path(__file__).resolve().parents[1] / "data"
+settings = Settings.from_env()
+_DATA = settings.data_dir
 
 staff: Store = JsonStore(_DATA / "staff.json")
 inventory: Store = JsonStore(_DATA / "inventory.json")
