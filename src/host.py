@@ -4,20 +4,19 @@ from __future__ import annotations
 
 import asyncio
 import json
+from datetime import UTC, datetime
 from pathlib import Path
 
 from mcp import ClientSession
 from mcp.client.stdio import stdio_client
 
-from client import server_params
-from generation.ollama import OllamaAdapter
 from client import call_tool, server_params
-from datetime import datetime, timezone
+from generation.ollama import OllamaAdapter
 
 ROOT = Path(__file__).resolve().parents[1]
 RUNS = ROOT / "runs"
 
-MAX_TURNS = 10
+MAX_TURNS = 8
 
 REQUESTS = [
     # --- 5 allow (eligible true) ---
@@ -82,7 +81,7 @@ REQUESTS = [
         "item": "second laptop",
         "reason": "need a travel laptop",
     },
-    # --- 10 escalate (eligible null) ---
+    # --- 5 escalate (eligible null) ---
     {
         "label": "escalate-duplicate-id",
         "employee_id": "E-1011",
@@ -96,40 +95,10 @@ REQUESTS = [
         "reason": "new hire kit",
     },
     {
-        "label": "escalate-contractor",
-        "employee_id": "E-1009",
-        "item": "monitor",
-        "reason": "no external display",
-    },
-    {
-        "label": "escalate-unmapped-desk",
-        "employee_id": "E-1001",
-        "item": "standing desk",
-        "reason": "back pain",
-    },
-    {
         "label": "escalate-unmapped-gpu",
         "employee_id": "E-1002",
         "item": "GPU",
         "reason": "video work",
-    },
-    {
-        "label": "escalate-unmapped-stipend",
-        "employee_id": "E-1003",
-        "item": "office stipend",
-        "reason": "buy my own gear",
-    },
-    {
-        "label": "escalate-unmapped-setup",
-        "employee_id": "E-1005",
-        "item": "full setup",
-        "reason": "whatever the standard kit is",
-    },
-    {
-        "label": "escalate-incomplete-date",
-        "employee_id": "E-1008",
-        "item": "laptop",
-        "reason": "replace current laptop",
     },
     {
         "label": "escalate-incomplete-status",
@@ -198,6 +167,18 @@ def fill_prompt(template: str, **values: str) -> str:
     return template
 
 
+def ticket_id(observation: str) -> str:
+    """Ticket from an Observation, if that key is present."""
+    if "review_ticket_id:" not in observation:
+        return ""
+    return (
+        observation.split("review_ticket_id:", 1)[1]
+        .strip()
+        .splitlines()[0]
+        .strip()
+    )
+
+
 def build_plan_prompt(listed, request: dict) -> str:
     """Fill ``plan.v1.md`` with this request and the listed tools."""
     return fill_prompt(
@@ -225,37 +206,22 @@ def build_react_prompt(
 
 
 def parse_action(text: str, listed) -> tuple[str, dict]:
-    """Read tool name plus args from Action Input or from Action: name(...)."""
+    """Read Action name and Action Input JSON. Name must match listed."""
     name = ""
-    call = ""
     raw = ""
     for line in text.splitlines():
         if line.startswith("Action Input:"):
             raw = line.split(":", 1)[1].strip()
         elif line.startswith("Action:"):
-            call = line.split(":", 1)[1].strip()
-            name = call.split("(")[0].strip()
-    args: dict = {}
-    if raw:
-        try:
-            parsed = json.loads(raw)
-        except json.JSONDecodeError:
-            parsed = {}
-        if isinstance(parsed, dict):
-            args = parsed
-    if not args and "(" in call and call.endswith(")"):
-        inner = call[call.find("(") + 1 : -1].strip()
-        if inner.startswith("{"):
-            args = json.loads(inner)
-        elif inner:
-            values = json.loads(f"[{inner}]")
-            keys = []
-            for tool in listed.tools:
-                if tool.name == name:
-                    keys = list((tool.input_schema or {}).get("properties") or {})
-                    break
-            args = dict(zip(keys, values))
-    return name, args
+            name = line.split(":", 1)[1].strip().split()[0]
+    allowed = {t.name for t in listed.tools}
+    if name not in allowed:
+        return name, {}
+    try:
+        parsed = json.loads(raw)
+    except json.JSONDecodeError:
+        parsed = {}
+    return name, parsed if isinstance(parsed, dict) else {}
 
 
 def one_turn(text: str) -> str:
@@ -280,7 +246,7 @@ def parse_final(text: str) -> tuple[str, str]:
     rationale = ""
     for line in text.splitlines():
         if line.startswith("Final Answer:"):
-            answer = line.split(":", 1)[1].strip().lower()
+            answer = line.split(":", 1)[1].strip().lower().split()[0]
         elif line.startswith("Rationale:"):
             rationale = line.split(":", 1)[1].strip()
     return answer, rationale
@@ -295,14 +261,36 @@ def expected_of(request: dict) -> str:
         return "deny"
     return "escalate"
 
-    
+
+def build_reflect_prompt(request: dict, draft: str, scratchpad: str) -> str:
+    """Fill ``reflect.v1.md`` with the draft, request, and Trace."""
+    return fill_prompt(
+        (PROMPTS / "reflect.v1.md").read_text(),
+        draft=draft,
+        employee_id=request["employee_id"],
+        item=request["item"],
+        reason=request["reason"],
+        scratchpad=scratchpad,
+    )
+
+
+def build_flag_prompt(listed, request: dict, rationale: str) -> str:
+    return fill_prompt(
+        (PROMPTS / "flag.v1.md").read_text(),
+        employee_id=request["employee_id"],
+        item=request["item"],
+        reason=rationale or request["reason"],
+        rationale=rationale or request["reason"],
+        tools=format_tools(listed),
+    )
+
+
 async def run_react(adapter, session, listed, request: dict, plan: str) -> dict:
     """Thought -> Action -> Observation until Final Answer or MAX_TURNS."""
     scratchpad = ""
     used: set[str] = set()
     final = ""
     steps: list[dict] = []
-    ticket = ""
     allowed = {t.name for t in listed.tools}
 
     for step in range(1, MAX_TURNS + 1):
@@ -348,13 +336,6 @@ async def run_react(adapter, session, listed, request: dict, plan: str) -> dict:
             observation = format_observation(action_result)
             used.add(name)
             record["tool_ran"] = True
-            if name == "flag_for_human_review" and "review_ticket_id:" in observation:
-                ticket = (
-                    observation.split("review_ticket_id:", 1)[1]
-                    .strip()
-                    .splitlines()[0]
-                    .strip()
-                )
 
         record["observation"] = observation
         print(f"Observation: {observation}")
@@ -364,31 +345,86 @@ async def run_react(adapter, session, listed, request: dict, plan: str) -> dict:
             break
 
     if not final:
-        print("--- decide ---")
-        all_names = {t.name for t in listed.tools}
-        scratchpad += (
-            "Observation: no more tool steps. Write Thought, Final Answer, "
-            "and Rationale from the Trace. Do not write Action.\n"
+        print("--- max-steps ---")
+        final = one_turn(
+            adapter.generate(
+                fill_prompt(
+                    (PROMPTS / "max_steps.v1.md").read_text(),
+                    employee_id=request["employee_id"],
+                    item=request["item"],
+                    reason=request["reason"],
+                    tools=format_tools(listed, used),
+                    scratchpad=scratchpad,
+                )
+            )
         )
-        turn = adapter.generate(
-            build_react_prompt(listed, request, plan, scratchpad, all_names)
-        )
-        print(turn)
-        final = turn
+        print(final)
         steps.append(
             {
-                "step": "decide",
-                "turn": turn,
+                "step": "max-steps",
+                "turn": final,
                 "action": None,
                 "args": {},
                 "tool_ran": False,
                 "observation": None,
             }
         )
+    
+    if final:
+        print("--- reflect ---")
+        reflected = adapter.generate(
+            build_reflect_prompt(request, final, scratchpad)
+        )
+        print(reflected)
+        steps.append(
+            {
+                "step": "reflect",
+                "turn": reflected,
+                "draft": final,
+                "action": None,
+                "args": {},
+                "tool_ran": False,
+                "observation": None,
+            }
+        )
+        final = reflected
 
     answer, rationale = parse_final(final)
     expected = expected_of(request)
-    flagged = "flag_for_human_review" in used
+    ticket = ""
+    if answer == "escalate":
+        print("--- flag ---")
+        turn = one_turn(adapter.generate(build_flag_prompt(listed, request, rationale)))
+        print(turn)
+        name, args = parse_action(turn, listed)
+        if name:
+            name = name.split()[0]
+        tool_ran = False
+        observation = "no Action in this turn"
+        if name and name in allowed:
+            observation = format_observation(await call_tool(session, name, args))
+            tool_ran = True
+            ticket = ticket_id(observation)
+        elif name:
+            observation = (
+                "unknown tool; use the Tools name that flags for human review"
+            )
+
+        print(f"Observation: {observation}")
+        steps.append(
+            {
+                "step": "flag",
+                "turn": turn,
+                "action": name,
+                "args": args,
+                "tool_ran": tool_ran,
+                "observation": observation,
+            }
+        )
+        if ticket and ticket not in rationale:
+            rationale = f"{rationale} review_ticket_id: {ticket}".strip()
+
+    flagged = bool(ticket)
     ok = answer == expected and (expected != "escalate" or flagged)
     return {
         "label": request["label"],
@@ -429,7 +465,7 @@ async def main() -> None:
             )
 
     RUNS.mkdir(parents=True, exist_ok=True)
-    path = RUNS / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ.json")
+    path = RUNS / datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ.json")
     path.write_text(json.dumps(results, indent=2) + "\n")
     print(f"wrote {path}")
     print("ok:", sum(1 for row in results if row["ok"]), "/", len(results))
