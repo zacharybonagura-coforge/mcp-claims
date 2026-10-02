@@ -28,6 +28,7 @@ class OllamaAdapter:
                 "model": self.model_id,
                 "prompt": prompt,
                 "stream": False,
+                "stop": ["\nObservation:", "\nThought:"],
                 "options": {"temperature": 0, "seed": 42},
             },
             timeout=120.0,
