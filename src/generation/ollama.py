@@ -13,8 +13,8 @@ class OllamaAdapter:
 
     def __init__(
         self,
-        model_id: str = "mistral:7b",
-        host: str = "http://localhost:11434",
+        model_id: str = "qwen3:8b",
+        host: str = "http://host.docker.internal:11434",
     ) -> None:
         """Use ``model_id`` and the Ollama ``host`` generate URL."""
         self.model_id = model_id
@@ -28,6 +28,7 @@ class OllamaAdapter:
                 "model": self.model_id,
                 "prompt": prompt,
                 "stream": False,
+                "think": False,
                 "stop": ["\nObservation:", "\nThought:"],
                 "options": {"temperature": 0, "seed": 42},
             },

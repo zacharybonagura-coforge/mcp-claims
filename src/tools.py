@@ -108,7 +108,7 @@ def check_request_eligibility(employee_id: str, item: str) -> dict[str, Any]:
         return {
             "employee_id": employee_id,
             "item": item,
-            "eligible": False,
+            "eligible": None,
             "policy_rule": None,
             "detail": "parse_error",
         }
@@ -141,7 +141,7 @@ def check_request_eligibility(employee_id: str, item: str) -> dict[str, Any]:
         return {
             "employee_id": employee_id,
             "item": item,
-            "eligible": False,
+            "eligible": None,
             "policy_rule": None,
             "detail": "mixed_items",
         }
