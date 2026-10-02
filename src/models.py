@@ -33,3 +33,10 @@ class PolicyLimit(TableModel):
     cap_active: int
     refresh_years: int | None = None
     policy_rule: str | None = None
+
+
+class ReviewTicket(TableModel):
+    review_ticket_id: str
+    employee_id: str
+    request: str
+    reason: str

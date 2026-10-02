@@ -1,12 +1,12 @@
 """Python functions used by the MCP tools."""
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
 from pydantic import ValidationError
 
-from models import Assignment, PolicyLimit, Staff
+from models import Assignment, PolicyLimit, ReviewTicket, Staff
 from store.base import Store
 from store.json import JsonStore
 
@@ -15,7 +15,7 @@ _DATA = Path(__file__).resolve().parents[1] / "data"
 staff: Store = JsonStore(_DATA / "staff.json")
 inventory: Store = JsonStore(_DATA / "inventory.json")
 policies: Store = JsonStore(_DATA / "policy_limits.json")
-
+reviews: Store = JsonStore(_DATA / "reviews.json")
 
 def _load_staff() -> list[Staff]:
     rows = []
@@ -35,6 +35,13 @@ def _load_limits() -> list[PolicyLimit]:
     rows = []
     for raw in policies.load()["limits"]:
         rows.append(PolicyLimit.model_validate(raw))
+    return rows
+
+
+def _load_reviews() -> list[ReviewTicket]:
+    rows = []
+    for raw in reviews.load()["tickets"]:
+        rows.append(ReviewTicket.model_validate(raw))
     return rows
 
 
@@ -221,7 +228,7 @@ def check_request_eligibility(employee_id: str, item: str) -> dict[str, Any]:
             "cap_active": cap,
         }
 
-    today = datetime.now(tz=timezone.utc).date()
+    today = datetime.now(tz=UTC).date()
     oldest = None
     oldest_assigned = None
     # Oldest dated unit is the first candidate to replace.
@@ -253,3 +260,36 @@ def check_request_eligibility(employee_id: str, item: str) -> dict[str, Any]:
     if due and replace_unit is not None:
         payload["replace_unit"] = replace_unit.model_dump(exclude_none=True)
     return payload
+
+
+def _next_review_id(tickets: list[ReviewTicket]) -> str:
+    highest = 0
+    for ticket in tickets:
+        raw = ticket.review_ticket_id.removeprefix("REV-")
+        try:
+            n = int(raw)
+        except ValueError:
+            continue
+        highest = max(highest, n)
+    return f"REV-{highest + 1:04d}"
+
+
+def flag_for_human_review(
+    employee_id: str, request: str, reason: str
+) -> dict[str, Any]:
+    """Escalate a request and return a review ticket id."""
+    tickets: list[ReviewTicket] = _load_reviews()
+
+    ticket = ReviewTicket(
+        review_ticket_id=_next_review_id(tickets),
+        employee_id=employee_id,
+        request=request,
+        reason=reason,
+    )
+    tickets.append(ticket)
+
+    saved: list[dict[str, Any]] = []
+    for row in tickets:
+        saved.append(row.model_dump())
+    reviews.save({"tickets": saved})
+    return {"review_ticket_id": ticket.review_ticket_id}
