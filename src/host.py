@@ -11,12 +11,13 @@ from mcp import ClientSession
 from mcp.client.stdio import stdio_client
 
 from client import call_tool, server_params
+from config import Settings
 from generation.ollama import OllamaAdapter
 
-ROOT = Path(__file__).resolve().parents[1]
-RUNS = ROOT / "runs"
-
-MAX_TURNS = 8
+settings = Settings.from_env()
+RUNS = settings.runs_dir
+MAX_TURNS = settings.max_turns
+PROMPTS = settings.prompts_dir
 
 REQUESTS = [
     # --- 5 allow (eligible true) ---
@@ -182,7 +183,7 @@ def ticket_id(observation: str) -> str:
 def build_plan_prompt(listed, request: dict) -> str:
     """Fill ``plan.v1.md`` with this request and the listed tools."""
     return fill_prompt(
-        (PROMPTS / "plan.v1.md").read_text(),
+        (PROMPTS / settings.plan_prompt).read_text(),
         employee_id=request["employee_id"],
         item=request["item"],
         reason=request["reason"],
@@ -195,7 +196,7 @@ def build_react_prompt(
 ) -> str:
     """Fill ``react.v2.md`` with the plan, request, remaining tools, and trace."""
     return fill_prompt(
-        (PROMPTS / "react.v2.md").read_text(),
+        (PROMPTS / settings.react_prompt).read_text(),
         plan=plan,
         employee_id=request["employee_id"],
         item=request["item"],
@@ -265,7 +266,7 @@ def expected_of(request: dict) -> str:
 def build_reflect_prompt(request: dict, draft: str, scratchpad: str) -> str:
     """Fill ``reflect.v1.md`` with the draft, request, and Trace."""
     return fill_prompt(
-        (PROMPTS / "reflect.v1.md").read_text(),
+        (PROMPTS / settings.reflect_prompt).read_text(),
         draft=draft,
         employee_id=request["employee_id"],
         item=request["item"],
@@ -276,7 +277,7 @@ def build_reflect_prompt(request: dict, draft: str, scratchpad: str) -> str:
 
 def build_flag_prompt(listed, request: dict, rationale: str) -> str:
     return fill_prompt(
-        (PROMPTS / "flag.v1.md").read_text(),
+        (PROMPTS / settings.flag_prompt).read_text(),
         employee_id=request["employee_id"],
         item=request["item"],
         reason=rationale or request["reason"],
@@ -349,7 +350,7 @@ async def run_react(adapter, session, listed, request: dict, plan: str) -> dict:
         final = one_turn(
             adapter.generate(
                 fill_prompt(
-                    (PROMPTS / "max_steps.v1.md").read_text(),
+                    (PROMPTS / settings.max_steps_prompt).read_text(),
                     employee_id=request["employee_id"],
                     item=request["item"],
                     reason=request["reason"],
@@ -444,7 +445,7 @@ async def run_react(adapter, session, listed, request: dict, plan: str) -> dict:
 
 async def main() -> None:
     """Connect to the equipment server, run each request, write runs/."""
-    adapter = OllamaAdapter("qwen3:8b", "http://host.docker.internal:11434")
+    adapter = OllamaAdapter(settings.generation_model, settings.ollama_host)
     async with (
         stdio_client(server_params()) as (read, write),
         ClientSession(read, write) as session,
