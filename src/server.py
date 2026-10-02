@@ -47,7 +47,6 @@ def check_request_eligibility(employee_id: str, item: str) -> dict[str, Any]:
     eligible is true, false, or null. detail explains the outcome
     (within_cap, refresh_ok, refresh_too_soon, identity, unmapped_item,
     mixed_items, policy_gap, incomplete_inventory, parse_error).
-    This is not a final approve or deny.
     """
     return run_eligibility_check(employee_id, item)
 

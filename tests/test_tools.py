@@ -191,7 +191,7 @@ def test_eligibility_under_cap_is_eligible() -> None:
     result = check_request_eligibility("E-2", "27 inch Monitor")
 
     assert result["eligible"] is True
-    assert result["detail"] == "within_cap"
+    assert result["detail"] == "manager monitor is under cap: 0 active, cap 2, room for more"
     assert result["category"] == "monitor"
     assert result["policy_rule"] == "R-MGR-MON"
     assert result["active"] == 0
@@ -202,7 +202,7 @@ def test_eligibility_open_keyboard_slot() -> None:
     result = check_request_eligibility("E-1", "keyboard")
 
     assert result["eligible"] is True
-    assert result["detail"] == "within_cap"
+    assert result["detail"] == "employee keyboard is under cap: 0 active, cap 1, room for more"
     assert result["category"] == "keyboard"
     assert result["policy_rule"] is None
     assert result["active"] == 0
@@ -213,7 +213,10 @@ def test_eligibility_refresh_due_replaces_oldest_unit() -> None:
     result = check_request_eligibility("E-REFRESH", "laptop")
 
     assert result["eligible"] is True
-    assert result["detail"] == "refresh_ok"
+    assert result["detail"] == (
+        "employee laptop is at cap (2/1); oldest unit assigned 2018-03-01 "
+        "is due for refresh (window 4 years)"
+    )
     assert result["policy_rule"] == "R-EMP-LAP"
     assert result["active"] == 2
     assert result["cap_active"] == 1
@@ -224,7 +227,7 @@ def test_eligibility_retired_unit_does_not_count_toward_cap() -> None:
     result = check_request_eligibility("E-RETIRED", "monitor")
 
     assert result["eligible"] is True
-    assert result["detail"] == "within_cap"
+    assert result["detail"] == "employee monitor is under cap: 0 active, cap 1, room for more"
     assert result["active"] == 0
     assert result["cap_active"] == 1
 
@@ -233,7 +236,10 @@ def test_eligibility_at_cap_and_too_new_is_not_eligible() -> None:
     result = check_request_eligibility("E-1", "monitor")
 
     assert result["eligible"] is False
-    assert result["detail"] == "refresh_too_soon"
+    assert result["detail"] == (
+        "employee monitor is at cap (1/1); oldest unit assigned 2025-01-10 "
+        "is still inside the 3-year refresh window"
+    )
     assert result["policy_rule"] == "R-EMP-MON"
     assert result["active"] == 1
     assert result["cap_active"] == 1
@@ -250,7 +256,10 @@ def test_eligibility_no_refresh_window_at_cap_is_not_eligible() -> None:
     result = check_request_eligibility("E-KBD", "keyboard")
 
     assert result["eligible"] is False
-    assert result["detail"] == "refresh_too_soon"
+    assert result["detail"] == (
+        "employee keyboard is at cap (1/1) and this policy row has no "
+        "refresh_years; cannot replace"
+    )
     assert result["policy_rule"] is None
 
 
@@ -258,36 +267,49 @@ def test_eligibility_unknown_employee_is_identity() -> None:
     result = check_request_eligibility("E-9999", "laptop")
 
     assert result["eligible"] is None
-    assert result["detail"] == "identity"
+    assert result["detail"] == (
+        "no staff row for employee_id E-9999; identity is unknown, cannot allow or deny"
+    )
 
 
 def test_eligibility_duplicate_employee_is_identity() -> None:
     result = check_request_eligibility("E-DUP", "laptop")
 
     assert result["eligible"] is None
-    assert result["detail"] == "identity"
+    assert result["detail"] == (
+        "2 staff rows share employee_id E-DUP; duplicate identity, do not pick a row"
+    )
 
 
 def test_eligibility_unmapped_item() -> None:
     result = check_request_eligibility("E-1", "gpu")
 
     assert result["eligible"] is None
-    assert result["detail"] == "unmapped_item"
+    assert result["detail"] == (
+        "'gpu' matches no covered category "
+        "(monitor, laptop, dock, headset, keyboard, mouse); unmapped item"
+    )
     assert "category" not in result
 
 
 def test_eligibility_mixed_items_is_decline() -> None:
     result = check_request_eligibility("E-1", "laptop and monitor")
 
-    assert result["eligible"] is False
-    assert result["detail"] == "mixed_items"
+    assert result["eligible"] is None
+    assert result["detail"] == (
+        "'laptop and monitor' names more than one covered category "
+        "(monitor, laptop); mixed request, cannot score as one item"
+    )
 
 
 def test_eligibility_contractor_has_policy_gap() -> None:
     result = check_request_eligibility("E-CONTRACTOR", "monitor")
 
     assert result["eligible"] is None
-    assert result["detail"] == "policy_gap"
+    assert result["detail"] == (
+        "no policy row for role 'contractor' and category 'monitor'; "
+        "policy gap, cannot allow or deny"
+    )
     assert result["category"] == "monitor"
 
 
@@ -295,14 +317,20 @@ def test_eligibility_employee_dock_is_policy_gap() -> None:
     result = check_request_eligibility("E-1", "dock")
 
     assert result["eligible"] is None
-    assert result["detail"] == "policy_gap"
+    assert result["detail"] == (
+        "no policy row for role 'employee' and category 'dock'; "
+        "policy gap, cannot allow or deny"
+    )
 
 
 def test_eligibility_missing_status_is_incomplete() -> None:
     result = check_request_eligibility("E-INCOMPLETE", "keyboard")
 
     assert result["eligible"] is None
-    assert result["detail"] == "incomplete_inventory"
+    assert result["detail"] == (
+        "keyboard assignment A-4 (asset_tag KBD-X) has no status; "
+        "cannot count active units toward the cap"
+    )
     assert result["policy_rule"] is None
 
 
@@ -310,7 +338,10 @@ def test_eligibility_missing_assigned_on_is_incomplete() -> None:
     result = check_request_eligibility("E-INCOMPLETE", "laptop")
 
     assert result["eligible"] is None
-    assert result["detail"] == "incomplete_inventory"
+    assert result["detail"] == (
+        "laptop assignment A-3 (asset_tag LAP-X) has no assigned_on; "
+        "at cap (1/1) so refresh age cannot be computed"
+    )
     assert result["policy_rule"] == "R-EMP-LAP"
     assert result["active"] == 1
     assert result["cap_active"] == 1
@@ -320,7 +351,7 @@ def test_eligibility_ignores_incomplete_units_in_other_categories() -> None:
     result = check_request_eligibility("E-INCOMPLETE", "monitor")
 
     assert result["eligible"] is True
-    assert result["detail"] == "within_cap"
+    assert result["detail"] == "employee monitor is under cap: 0 active, cap 1, room for more"
 
 
 def test_eligibility_parse_error_is_ineligible(tmp_path: Path) -> None:
@@ -331,8 +362,10 @@ def test_eligibility_parse_error_is_ineligible(tmp_path: Path) -> None:
 
     result = check_request_eligibility("E-1", "laptop")
 
-    assert result["eligible"] is False
-    assert result["detail"] == "parse_error"
+    assert result["eligible"] is None
+    assert result["detail"] == (
+        "staff or inventory JSON failed validation; cannot check 'laptop' for E-1"
+    )
 
 
 def test_eligibility_missing_staff_key_still_raises(tmp_path: Path) -> None:

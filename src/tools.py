@@ -110,16 +110,35 @@ def check_request_eligibility(employee_id: str, item: str) -> dict[str, Any]:
             "item": item,
             "eligible": None,
             "policy_rule": None,
-            "detail": "parse_error",
+            "detail": (
+                f"staff or inventory JSON failed validation; "
+                f"cannot check {item!r} for {employee_id}"
+            ),
         }
-    if len(people) != 1:
+    n = len(people)
+    if n == 0:
         return {
             "employee_id": employee_id,
             "item": item,
             "eligible": None,
             "policy_rule": None,
-            "detail": "identity",
+            "detail": (
+                f"no staff row for employee_id {employee_id}; "
+                "identity is unknown, cannot allow or deny"
+            ),
         }
+    if n > 1:
+        return {
+            "employee_id": employee_id,
+            "item": item,
+            "eligible": None,
+            "policy_rule": None,
+            "detail": (
+                f"{n} staff rows share employee_id {employee_id}; "
+                "duplicate identity, do not pick a row"
+            ),
+        }
+
     person = people[0]
 
     text = item.lower()
@@ -135,7 +154,10 @@ def check_request_eligibility(employee_id: str, item: str) -> dict[str, Any]:
             "item": item,
             "eligible": None,
             "policy_rule": None,
-            "detail": "unmapped_item",
+            "detail": (
+                f"{item!r} matches no covered category "
+                f"({', '.join(COVERED_CATEGORIES)}); unmapped item"
+            ),
         }
     if len(found) > 1:
         return {
@@ -143,7 +165,10 @@ def check_request_eligibility(employee_id: str, item: str) -> dict[str, Any]:
             "item": item,
             "eligible": None,
             "policy_rule": None,
-            "detail": "mixed_items",
+            "detail": (
+                f"{item!r} names more than one covered category "
+                f"({', '.join(found)}); mixed request, cannot score as one item"
+            ),
         }
     category = found[0]
 
@@ -167,7 +192,10 @@ def check_request_eligibility(employee_id: str, item: str) -> dict[str, Any]:
             "category": category,
             "eligible": None,
             "policy_rule": None,
-            "detail": "policy_gap",
+            "detail": (
+                f"no policy row for role {person.role!r} and category {category!r}; "
+                "policy gap, cannot allow or deny"
+            ),
         }
 
     active = 0
@@ -181,7 +209,11 @@ def check_request_eligibility(employee_id: str, item: str) -> dict[str, Any]:
                 "category": category,
                 "eligible": None,
                 "policy_rule": limit.policy_rule,
-                "detail": "incomplete_inventory",
+                "detail": (
+                    f"{category} assignment {unit.assignment_id} "
+                    f"(asset_tag {unit.asset_tag}) has no status; "
+                    "cannot count active units toward the cap"
+                ),
             }
         if unit.status == "active":
             active += 1
@@ -195,7 +227,10 @@ def check_request_eligibility(employee_id: str, item: str) -> dict[str, Any]:
             "category": category,
             "eligible": under_cap,
             "policy_rule": limit.policy_rule,
-            "detail": "within_cap",
+            "detail": (
+                f"{person.role} {category} is under cap: "
+                f"{active} active, cap {cap}, room for more"
+            ),
             "active": active,
             "cap_active": cap,
         }
@@ -209,7 +244,11 @@ def check_request_eligibility(employee_id: str, item: str) -> dict[str, Any]:
                 "category": category,
                 "eligible": None,
                 "policy_rule": limit.policy_rule,
-                "detail": "incomplete_inventory",
+                "detail": (
+                    f"{category} assignment {unit.assignment_id} "
+                    f"(asset_tag {unit.asset_tag}) has no assigned_on; "
+                    f"at cap ({active}/{cap}) so refresh age cannot be computed"
+                ),
                 "active": active,
                 "cap_active": cap,
             }
@@ -223,7 +262,10 @@ def check_request_eligibility(employee_id: str, item: str) -> dict[str, Any]:
             "category": category,
             "eligible": False,
             "policy_rule": limit.policy_rule,
-            "detail": "refresh_too_soon",
+            "detail": (
+                f"{person.role} {category} is at cap ({active}/{cap}) "
+                "and this policy row has no refresh_years; cannot replace"
+            ),
             "active": active,
             "cap_active": cap,
         }
@@ -252,7 +294,19 @@ def check_request_eligibility(employee_id: str, item: str) -> dict[str, Any]:
         "category": category,
         "eligible": due,
         "policy_rule": limit.policy_rule,
-        "detail": "refresh_ok" if due else "refresh_too_soon",
+        "detail": (
+            (
+                f"{person.role} {category} is at cap ({active}/{cap}); "
+                f"oldest unit assigned {oldest_assigned} is due for refresh "
+                f"(window {refresh_years} years)"
+            )
+            if due
+            else (
+                f"{person.role} {category} is at cap ({active}/{cap}); "
+                f"oldest unit assigned {oldest_assigned} is still inside the "
+                f"{refresh_years}-year refresh window"
+            )
+        ),
         "active": active,
         "cap_active": cap,
     }
