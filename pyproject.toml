@@ -59,3 +59,15 @@ testpaths = ["tests"]
 
 [tool.pyright]
 extraPaths = ["src"]
+
+[tool.coverage.run]
+source = ["src"]
+omit = [
+    "src/store/*",
+    "src/generation/*",
+]
+
+[tool.coverage.report]
+exclude_also = [
+    'if __name__ == "__main__":',
+]
