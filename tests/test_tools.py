@@ -8,12 +8,14 @@ import shutil
 from pathlib import Path
 
 import pytest
+from pydantic import ValidationError
 
 from store.json import JsonStore
 from tools import (
+    check_request_eligibility,
+    flag_for_human_review,
     get_employee_info,
     get_policy_limits,
-    check_request_eligibility
 )
 
 _MOCK_DIR = Path(__file__).parent / "mock_data"
@@ -28,6 +30,7 @@ def employee_data(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> Path:
         "tools.inventory", JsonStore(tmp_path / "inventory.json")
     )
     monkeypatch.setattr("tools.policies", JsonStore(tmp_path / "policy_limits.json"))
+    monkeypatch.setattr("tools.reviews", JsonStore(tmp_path / "reviews.json"))
     return tmp_path
 
 
@@ -336,3 +339,74 @@ def test_eligibility_missing_staff_key_still_raises(tmp_path: Path) -> None:
 
     with pytest.raises(KeyError):
         check_request_eligibility("E-1", "laptop")
+
+
+def test_flag_first_ticket_is_persisted(tmp_path: Path) -> None:
+    result = flag_for_human_review("E-1", "second monitor", "identity")
+
+    assert result == {"review_ticket_id": "REV-0001"}
+    payload = JsonStore(tmp_path / "reviews.json").load()
+    assert payload["tickets"] == [
+        {
+            "review_ticket_id": "REV-0001",
+            "employee_id": "E-1",
+            "request": "second monitor",
+            "reason": "identity",
+        }
+    ]
+
+
+def test_flag_second_ticket_increments_id(tmp_path: Path) -> None:
+    first = flag_for_human_review("E-1", "laptop", "incomplete_inventory")
+    second = flag_for_human_review("E-9999", "standing desk", "unmapped_item")
+
+    assert first["review_ticket_id"] == "REV-0001"
+    assert second["review_ticket_id"] == "REV-0002"
+    payload = JsonStore(tmp_path / "reviews.json").load()
+    assert len(payload["tickets"]) == 2
+    assert payload["tickets"][1]["employee_id"] == "E-9999"
+    assert payload["tickets"][1]["reason"] == "unmapped_item"
+
+
+def test_flag_continues_from_highest_existing_id(tmp_path: Path) -> None:
+    (tmp_path / "reviews.json").write_text(
+        '{"tickets":['
+        '{"review_ticket_id":"REV-0001","employee_id":"E-1","request":"a","reason":"x"},'
+        '{"review_ticket_id":"REV-0005","employee_id":"E-2","request":"b","reason":"y"}'
+        "]}"
+    )
+
+    result = flag_for_human_review("E-2", "monitor", "policy_gap")
+
+    assert result["review_ticket_id"] == "REV-0006"
+
+
+def test_flag_skips_non_numeric_ticket_ids(tmp_path: Path) -> None:
+    (tmp_path / "reviews.json").write_text(
+        '{"tickets":['
+        '{"review_ticket_id":"REV-ABC","employee_id":"E-1","request":"a","reason":"x"}'
+        "]}"
+    )
+
+    result = flag_for_human_review("E-1", "laptop", "identity")
+
+    assert result["review_ticket_id"] == "REV-0001"
+
+
+def test_flag_missing_tickets_key_raises(tmp_path: Path) -> None:
+    (tmp_path / "reviews.json").write_text("{}")
+
+    with pytest.raises(KeyError):
+        flag_for_human_review("E-1", "laptop", "identity")
+
+
+def test_flag_extra_field_on_existing_ticket_raises(tmp_path: Path) -> None:
+    (tmp_path / "reviews.json").write_text(
+        '{"tickets":['
+        '{"review_ticket_id":"REV-0001","employee_id":"E-1",'
+        '"request":"a","reason":"x","notes":"nope"}'
+        "]}"
+    )
+
+    with pytest.raises(ValidationError):
+        flag_for_human_review("E-1", "laptop", "identity")
