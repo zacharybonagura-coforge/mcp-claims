@@ -6,29 +6,38 @@
 
 monitor, laptop, dock, headset, keyboard, mouse. Anything else is unmapped (escalate).
 
+`item` maps by case-insensitive substring. None of the names → unmapped. More than one name → mixed. Words such as `second` or `third` are not treated as a quantity.
+
 ### Roles
 
-`employee` and `manager` only. Any other role is a policy gap (escalate).
+`employee` and `manager` only. Any other role (for example `contractor`) is a policy gap (escalate).
 
 ### How limits are applied
 
-Caps count **active** assignments. Age is years since `assigned_on`. Rule ids (`R-...`) are what the agent puts on `policy_rule`.
+Caps count assignments with `status` equal to `active`. Retired and other statuses do not count toward the cap.
 
-## New hire
+Age is years since `assigned_on` on the oldest *dated* matching unit, and only when the request is already at cap: `(today - assigned_on).days / 365.25`.
 
-### Eligibility
+- Missing `status` on a matching assignment → escalate (cannot count the cap).
+- Missing `assigned_on` on an **active** unit **at cap** → escalate (cannot compute refresh age).
+- Under cap, dates are not required.
 
-`hire_date` within 90 days and **zero** active items in that category.
+Rule ids (`R-...`) are the `policy_rule` on the matching `policy_limits.json` row. One id per role + category.
 
-### Standard kit
+### Scoring
 
-1 laptop, 1 monitor, 1 dock, 1 keyboard, 1 mouse, 1 headset, without waiting on refresh windows.
+1. **Under cap** (`active < cap_active`) → allow. This covers first issue, extra unit under a manager cap, new-hire kit (zero active in that category), and a retired-only desk (retired is not active).
+2. **At cap, no `refresh_years`** → deny.
+3. **At cap, oldest dated unit age ≥ `refresh_years`** → allow (due for refresh). The eligibility payload may include `replace_unit`.
+4. **At cap, oldest dated unit still inside the window** → deny.
+
+`hire_date` is returned on the employee record. It is not a separate eligibility gate.
 
 ## Employee
 
 ### Monitor
 
-Cap 1 active. Replacement if current unit is ≥ 3 years or retired. Second monitor is deny (`R-EMP-MON`, `R-EMP-MON-CAP`).
+Cap 1 active. Refresh if ≥ 3 years (`R-EMP-MON`).
 
 ### Laptop
 
@@ -36,7 +45,7 @@ Cap 1 active. Refresh if ≥ 4 years (`R-EMP-LAP`).
 
 ### Dock
 
-Cap 1 active. Refresh if ≥ 4 years, tied to laptop cycle (`R-EMP-DOCK`).
+Cap 1 active. Refresh if ≥ 4 years (`R-EMP-DOCK`).
 
 ### Headset
 
@@ -54,7 +63,7 @@ Cap 1 active. Refresh if ≥ 2 years (`R-EMP-MOU`).
 
 ### Monitor
 
-Cap 2 active. Additional unit allowed until cap. Replacing one unit: that unit ≥ 3 years (`R-MGR-MON`).
+Cap 2 active. Additional unit allowed until cap. At cap, replace if the oldest unit is ≥ 3 years (`R-MGR-MON`).
 
 ### Laptop
 
@@ -80,8 +89,8 @@ Cap 1 active. Refresh if ≥ 2 years (`R-MGR-MOU`).
 
 ### Counted units
 
-Quantity > 1 is approve only if each unit fits the cap (for example a manager with 0 monitors requesting 2).
+The eligibility tool does not parse a number from `item`. Reflect should fail an allow draft if the item names a count larger than remaining cap (`cap_active` minus `active`).
 
 ### Vague count
 
-"A few monitors" or "full setup" with no number is escalate, not deny.
+"A few monitors", "several", or "full setup" with no number is escalate, not deny, when `eligible` is not already `false`.
