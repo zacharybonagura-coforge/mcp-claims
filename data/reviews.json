@@ -1,3 +1,1663 @@
 {
-  "tickets": []
+  "tickets": [
+    {
+      "review_ticket_id": "REV-0001",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "identity",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0002",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "identity",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0003",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "identity",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0004",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "identity",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0005",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "identity",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0006",
+      "employee_id": "E-1009",
+      "request": "monitor",
+      "reason": "Policy rule for the 'monitor' item is missing.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0007",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "identity",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0008",
+      "employee_id": "E-1009",
+      "request": "monitor",
+      "reason": "Policy gap prevents automatic approval for the request.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0009",
+      "employee_id": "E-1003",
+      "request": "second monitor",
+      "reason": "The number of active monitors for employee E-1003 is not clear.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0010",
+      "employee_id": "E-1009",
+      "request": "monitor",
+      "reason": "policy_gap",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0011",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "identity",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0012",
+      "employee_id": "E-1009",
+      "request": "monitor",
+      "reason": "policy_gap",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0013",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "incomplete inventory",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0014",
+      "employee_id": "E-1001",
+      "request": "laptop and monitor",
+      "reason": "mixed_items",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0015",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "new hire kit",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0016",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0017",
+      "employee_id": "E-1001",
+      "request": "standing desk",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0018",
+      "employee_id": "E-1008",
+      "request": "laptop",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0019",
+      "employee_id": "E-1010",
+      "request": "keyboard",
+      "reason": "incomplete_inventory",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0020",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0021",
+      "employee_id": "E-1001",
+      "request": "standing desk",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0022",
+      "employee_id": "E-1008",
+      "request": "laptop",
+      "reason": "incomplete_inventory",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0023",
+      "employee_id": "E-1010",
+      "request": "keyboard",
+      "reason": "incomplete_inventory",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0024",
+      "employee_id": "E-1001",
+      "request": "laptop and monitor",
+      "reason": "mixed_items",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0025",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0026",
+      "employee_id": "E-1009",
+      "request": "monitor",
+      "reason": "no external display",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0027",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0028",
+      "employee_id": "E-1001",
+      "request": "standing desk",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0029",
+      "employee_id": "E-1008",
+      "request": "laptop",
+      "reason": "incomplete_inventory",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0030",
+      "employee_id": "E-1010",
+      "request": "keyboard",
+      "reason": "incomplete_inventory",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0031",
+      "employee_id": "E-1001",
+      "request": "laptop and monitor",
+      "reason": "mixed_items",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0032",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0033",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0034",
+      "employee_id": "E-1009",
+      "request": "monitor",
+      "reason": "no external display",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0035",
+      "employee_id": "E-1001",
+      "request": "standing desk",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0036",
+      "employee_id": "E-1002",
+      "request": "GPU",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0037",
+      "employee_id": "E-1003",
+      "request": "office stipend",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0038",
+      "employee_id": "E-1005",
+      "request": "full setup",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0039",
+      "employee_id": "E-1008",
+      "request": "laptop",
+      "reason": "incomplete_inventory",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0040",
+      "employee_id": "E-1010",
+      "request": "keyboard",
+      "reason": "incomplete_inventory",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0041",
+      "employee_id": "E-1001",
+      "request": "laptop and monitor",
+      "reason": "mixed_items",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0042",
+      "employee_id": "E-1003",
+      "request": "second monitor",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0043",
+      "employee_id": "E-1005",
+      "request": "laptop",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0044",
+      "employee_id": "E-1004",
+      "request": "third monitor",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0045",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0046",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0047",
+      "employee_id": "E-1001",
+      "request": "standing desk",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0048",
+      "employee_id": "E-1002",
+      "request": "GPU",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0049",
+      "employee_id": "E-1003",
+      "request": "office stipend",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0050",
+      "employee_id": "E-1005",
+      "request": "full setup",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0051",
+      "employee_id": "E-1008",
+      "request": "laptop",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0052",
+      "employee_id": "E-1010",
+      "request": "keyboard",
+      "reason": "incomplete_inventory",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0053",
+      "employee_id": "E-1001",
+      "request": "laptop and monitor",
+      "reason": "mixed_items",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0054",
+      "employee_id": "E-1003",
+      "request": "second monitor",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0055",
+      "employee_id": "E-1005",
+      "request": "laptop",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0056",
+      "employee_id": "E-1006",
+      "request": "monitor",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0057",
+      "employee_id": "E-1002",
+      "request": "laptop",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0058",
+      "employee_id": "E-1002",
+      "request": "monitor",
+      "reason": "no external display on file",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0059",
+      "employee_id": "E-1001",
+      "request": "second monitor",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0060",
+      "employee_id": "E-1001",
+      "request": "laptop",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0061",
+      "employee_id": "E-1007",
+      "request": "headset",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0062",
+      "employee_id": "E-1004",
+      "request": "third monitor",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0063",
+      "employee_id": "E-1001",
+      "request": "second laptop",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0064",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0065",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0066",
+      "employee_id": "E-1009",
+      "request": "monitor",
+      "reason": "no external display",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0067",
+      "employee_id": "E-1001",
+      "request": "standing desk",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0068",
+      "employee_id": "E-1002",
+      "request": "GPU",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0069",
+      "employee_id": "E-1003",
+      "request": "office stipend",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0070",
+      "employee_id": "E-1005",
+      "request": "full setup",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0071",
+      "employee_id": "E-1008",
+      "request": "laptop",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0072",
+      "employee_id": "E-1010",
+      "request": "keyboard",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0073",
+      "employee_id": "E-1001",
+      "request": "laptop and monitor",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0074",
+      "employee_id": "E-1004",
+      "request": "third monitor",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0075",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0076",
+      "employee_id": "E-1009",
+      "request": "monitor",
+      "reason": "no external display",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0077",
+      "employee_id": "E-1001",
+      "request": "standing desk",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0078",
+      "employee_id": "E-1002",
+      "request": "GPU",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0079",
+      "employee_id": "E-1005",
+      "request": "full setup",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0080",
+      "employee_id": "E-1008",
+      "request": "laptop",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0081",
+      "employee_id": "E-1010",
+      "request": "keyboard",
+      "reason": "incomplete_inventory",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0082",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0083",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0084",
+      "employee_id": "E-1009",
+      "request": "monitor",
+      "reason": "no external display",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0085",
+      "employee_id": "E-1001",
+      "request": "standing desk",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0086",
+      "employee_id": "E-1002",
+      "request": "GPU",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0087",
+      "employee_id": "E-1003",
+      "request": "office stipend",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0088",
+      "employee_id": "E-1005",
+      "request": "full setup",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0089",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "current laptop is slow",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0090",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "current laptop is slow",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0091",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0092",
+      "employee_id": "E-1009",
+      "request": "monitor",
+      "reason": "no external display",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0093",
+      "employee_id": "E-1001",
+      "request": "standing desk",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0094",
+      "employee_id": "E-1002",
+      "request": "GPU",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0095",
+      "employee_id": "E-1003",
+      "request": "office stipend",
+      "reason": "buy my own gear",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0096",
+      "employee_id": "E-1005",
+      "request": "full setup",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0097",
+      "employee_id": "E-1008",
+      "request": "laptop",
+      "reason": "incomplete_inventory",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0098",
+      "employee_id": "E-1010",
+      "request": "keyboard",
+      "reason": "incomplete_inventory",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0099",
+      "employee_id": "E-1001",
+      "request": "laptop and monitor",
+      "reason": "mixed_items",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0100",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "current laptop is slow",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0101",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0102",
+      "employee_id": "E-1009",
+      "request": "monitor",
+      "reason": "no external display",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0103",
+      "employee_id": "E-1001",
+      "request": "standing desk",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0104",
+      "employee_id": "E-1002",
+      "request": "GPU",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0105",
+      "employee_id": "E-1003",
+      "request": "office stipend",
+      "reason": "buy my own gear",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0106",
+      "employee_id": "E-1005",
+      "request": "full setup",
+      "reason": "unmapped_item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0107",
+      "employee_id": "E-1008",
+      "request": "laptop",
+      "reason": "incomplete_inventory",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0108",
+      "employee_id": "E-1010",
+      "request": "keyboard",
+      "reason": "incomplete_inventory",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0109",
+      "employee_id": "E-1001",
+      "request": "laptop and monitor",
+      "reason": "mixed_items",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0110",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "current laptop is slow",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0111",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "identity",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0112",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "identity",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0113",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "identity",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0114",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "2 staff rows share employee_id E-1011; duplicate identity, do not pick a row",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0115",
+      "employee_id": "E-1005",
+      "request": "laptop",
+      "reason": "eligible is true, but request requires human review for final approval",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0116",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "2 staff rows share employee_id E-1011; duplicate identity, do not pick a row",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0117",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "no staff row for employee_id E-9999; identity is unknown, cannot allow or deny",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0118",
+      "employee_id": "E-1009",
+      "request": "monitor",
+      "reason": "no policy row for role 'contractor' and category 'monitor'; policy gap, cannot allow or deny",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0119",
+      "employee_id": "E-1001",
+      "request": "standing desk",
+      "reason": "unmapped item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0120",
+      "employee_id": "E-1003",
+      "request": "buy my own gear",
+      "reason": "item is unmapped",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0121",
+      "employee_id": "E-1005",
+      "request": "full setup",
+      "reason": "item is unmapped",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0122",
+      "employee_id": "E-1010",
+      "request": "keyboard",
+      "reason": "keyboard assignment A-012 (asset_tag KBD-1010) has no status; cannot count active units toward the cap",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0123",
+      "employee_id": "E-1001",
+      "request": "laptop and monitor",
+      "reason": "mixed request, cannot score as one item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0124",
+      "employee_id": "E-1004",
+      "request": "third monitor",
+      "reason": "manager monitor is at cap (2/2); oldest unit assigned 2024-01-15 is still inside the 3-year refresh window",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0125",
+      "employee_id": "E-1001",
+      "request": "second laptop",
+      "reason": "employee laptop is at cap (1/1); oldest unit assigned 2024-03-01 is still inside the 4-year refresh window",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0126",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "new hire kit",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0127",
+      "employee_id": "E-1009",
+      "request": "monitor",
+      "reason": "no policy row for role 'contractor' and category 'monitor'; policy gap, cannot allow or deny",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0128",
+      "employee_id": "E-1001",
+      "request": "standing desk",
+      "reason": "standing desk matches no covered category (monitor, laptop, dock, headset, keyboard, mouse); unmapped item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0129",
+      "employee_id": "E-1002",
+      "request": "GPU",
+      "reason": "GPU matches no covered category (monitor, laptop, dock, headset, keyboard, mouse); unmapped item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0130",
+      "employee_id": "E-1003",
+      "request": "office stipend",
+      "reason": "unmapped item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0131",
+      "employee_id": "E-1004",
+      "request": "third monitor",
+      "reason": "manager monitor is at cap (2/2); oldest unit assigned 2024-01-15 is still inside the 3-year refresh window",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0132",
+      "employee_id": "E-1001",
+      "request": "second laptop",
+      "reason": "employee laptop is at cap (1/1); oldest unit assigned 2024-03-01 is still inside the 4-year refresh window",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0133",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "new hire kit",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0134",
+      "employee_id": "E-1009",
+      "request": "monitor",
+      "reason": "no policy row for role 'contractor' and category 'monitor'; policy gap, cannot allow or deny",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0135",
+      "employee_id": "E-1001",
+      "request": "standing desk",
+      "reason": "standing desk matches no covered category (monitor, laptop, dock, headset, keyboard, mouse); unmapped item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0136",
+      "employee_id": "E-1002",
+      "request": "GPU",
+      "reason": "GPU matches no covered category (monitor, laptop, dock, headset, keyboard, mouse); unmapped item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0137",
+      "employee_id": "E-1003",
+      "request": "office stipend",
+      "reason": "unmapped item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0138",
+      "employee_id": "E-1005",
+      "request": "full setup",
+      "reason": "'full setup' matches no covered category (monitor, laptop, dock, headset, keyboard, mouse); unmapped item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0139",
+      "employee_id": "E-1008",
+      "request": "laptop",
+      "reason": "laptop assignment A-011 (asset_tag LAP-1008) has no assigned_on; at cap (1/1) so refresh age cannot be computed",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0140",
+      "employee_id": "E-1010",
+      "request": "keyboard",
+      "reason": "keyboard assignment A-012 (asset_tag KBD-1010) has no status; cannot count active units toward the cap",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0141",
+      "employee_id": "E-1001",
+      "request": "laptop and monitor",
+      "reason": "laptop and monitor names more than one covered category (monitor, laptop); mixed request, cannot score as one item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0142",
+      "employee_id": "E-1007",
+      "request": "headset",
+      "reason": "employee headset is at cap (1/1); oldest unit assigned 2025-10-01 is still inside the 2-year refresh window",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0143",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "2 staff rows share employee_id E-1011; duplicate identity, do not pick a row",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0144",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "no staff row for employee_id E-9999; identity is unknown, cannot allow or deny",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0145",
+      "employee_id": "E-1009",
+      "request": "monitor",
+      "reason": "no policy row for role 'contractor' and category 'monitor'; policy gap, cannot allow or deny",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0146",
+      "employee_id": "E-1001",
+      "request": "standing desk",
+      "reason": "'standing desk' matches no covered category (monitor, laptop, dock, headset, keyboard, mouse); unmapped item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0147",
+      "employee_id": "E-1002",
+      "request": "GPU",
+      "reason": "GPU matches no covered category (monitor, laptop, dock, headset, keyboard, mouse); unmapped item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0148",
+      "employee_id": "E-1003",
+      "request": "office stipend",
+      "reason": "'office stipend' matches no covered category (monitor, laptop, dock, headset, keyboard, mouse); unmapped item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0149",
+      "employee_id": "E-1005",
+      "request": "full setup",
+      "reason": "'full setup' matches no covered category (monitor, laptop, dock, headset, keyboard, mouse); unmapped item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0150",
+      "employee_id": "E-1008",
+      "request": "laptop",
+      "reason": "laptop assignment A-011 (asset_tag LAP-1008) has no assigned_on; at cap (1/1) so refresh age cannot be computed",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0151",
+      "employee_id": "E-1001",
+      "request": "laptop and monitor",
+      "reason": "laptop and monitor names more than one covered category (monitor, laptop); mixed request, cannot score as one item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0152",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "new hire kit",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0153",
+      "employee_id": "E-1003",
+      "request": "office stipend",
+      "reason": "unmapped item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0154",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "policy gap: role unknown",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0155",
+      "employee_id": "E-1001",
+      "request": "laptop and monitor",
+      "reason": "mixed request categories, cannot score as one item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0156",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "policy gap: role unknown",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0157",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "no staff row for employee_id E-9999; identity is unknown, cannot allow or deny",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0158",
+      "employee_id": "E-1009",
+      "request": "monitor",
+      "reason": "no policy row for role 'contractor' and category 'monitor'; policy gap, cannot allow or deny",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0159",
+      "employee_id": "E-1001",
+      "request": "standing desk",
+      "reason": "unmapped item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0160",
+      "employee_id": "E-1003",
+      "request": "office stipend",
+      "reason": "unmapped item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0161",
+      "employee_id": "E-1005",
+      "request": "full setup",
+      "reason": "unmapped item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0162",
+      "employee_id": "E-1001",
+      "request": "laptop and monitor",
+      "reason": "mixed request, cannot score as one item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0163",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "duplicate identity, do not pick a row",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0164",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "max_steps",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0165",
+      "employee_id": "E-1001",
+      "request": "standing desk",
+      "reason": "unmapped item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0166",
+      "employee_id": "E-1002",
+      "request": "GPU",
+      "reason": "GPU matches no covered category (monitor, laptop, dock, headset, keyboard, mouse); unmapped item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0167",
+      "employee_id": "E-1003",
+      "request": "office stipend",
+      "reason": "unmapped item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0168",
+      "employee_id": "E-1005",
+      "request": "full setup",
+      "reason": "item is unmapped",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0169",
+      "employee_id": "E-1010",
+      "request": "keyboard",
+      "reason": "keyboard assignment A-012 (asset_tag KBD-1010) has no status; cannot count active units toward the cap",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0170",
+      "employee_id": "E-1001",
+      "request": "laptop and monitor",
+      "reason": "mixed request, cannot score as one item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0171",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "duplicate identity, do not pick a row",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0172",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "max_steps",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0173",
+      "employee_id": "E-1002",
+      "request": "GPU",
+      "reason": "GPU matches no covered category (monitor, laptop, dock, headset, keyboard, mouse); unmapped item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0174",
+      "employee_id": "E-1010",
+      "request": "keyboard",
+      "reason": "keyboard assignment A-012 (asset_tag KBD-1010) has no status; cannot count active units toward the cap",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0175",
+      "employee_id": "E-1001",
+      "request": "laptop and monitor",
+      "reason": "mixed request, cannot score as one item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0176",
+      "employee_id": "E-1003",
+      "request": "second monitor",
+      "reason": "The trace is empty, indicating no observations were made to determine eligibility.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0177",
+      "employee_id": "E-1001",
+      "request": "second monitor",
+      "reason": "Trace indicates no Action in this turn, meaning the system could not determine eligibility.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0178",
+      "employee_id": "E-1005",
+      "request": "laptop",
+      "reason": "Trace indicates no Action in this turn, meaning the system could not determine eligibility.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0179",
+      "employee_id": "E-1002",
+      "request": "monitor",
+      "reason": "Trace indicates no Action in this turn, meaning the system could not determine eligibility.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0180",
+      "employee_id": "E-1001",
+      "request": "second monitor",
+      "reason": "Trace indicates no Action in this turn, meaning the system could not determine eligibility.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0181",
+      "employee_id": "E-1001",
+      "request": "laptop",
+      "reason": "Trace indicates no Action in this turn, meaning the system could not determine eligibility.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0182",
+      "employee_id": "E-1007",
+      "request": "headset",
+      "reason": "Trace indicates no Action in this turn, meaning the system could not determine eligibility.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0183",
+      "employee_id": "E-1004",
+      "request": "third monitor",
+      "reason": "Trace indicates no Action in this turn, meaning the system could not determine eligibility.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0184",
+      "employee_id": "E-1001",
+      "request": "second laptop",
+      "reason": "Trace indicates no Action in this turn, meaning the system could not determine eligibility.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0185",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "Trace indicates no Action in this turn, meaning the system could not determine eligibility.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0186",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "Trace indicates no Action in this turn, meaning the system could not determine eligibility.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0187",
+      "employee_id": "E-1002",
+      "request": "GPU",
+      "reason": "Trace indicates no Action in this turn, meaning the system could not determine eligibility.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0188",
+      "employee_id": "E-1010",
+      "request": "keyboard",
+      "reason": "Trace indicates no Action in this turn, meaning the request lacks sufficient information to determine eligibility.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0189",
+      "employee_id": "E-1001",
+      "request": "laptop and monitor",
+      "reason": "Trace indicates no Action in this turn, meaning the system could not determine eligibility.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0190",
+      "employee_id": "E-1005",
+      "request": "laptop",
+      "reason": "The trace is empty, so there are no observations to determine eligibility. The request cannot be decided without further information.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0191",
+      "employee_id": "E-1006",
+      "request": "monitor",
+      "reason": "The trace is empty, so we need to start by retrieving employee information to determine eligibility.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0192",
+      "employee_id": "E-1002",
+      "request": "laptop",
+      "reason": "The trace is empty, so there are no observations to determine eligibility. The request cannot be decided without further information.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0193",
+      "employee_id": "E-1002",
+      "request": "monitor",
+      "reason": "The trace is empty, so there are no observations to determine eligibility. The request cannot be decided without further information.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0194",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "The Trace detail indicates 2 staff rows share employee_id E-1011; duplicate identity, do not pick a row. This makes it impossible to determine eligibility.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0195",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "no staff row for employee_id E-9999; identity is unknown, cannot allow or deny",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0196",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "no staff row for employee_id E-9999; identity is unknown, cannot allow or deny",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0197",
+      "employee_id": "E-1002",
+      "request": "GPU",
+      "reason": "The Trace detail states 'GPU' matches no covered category (monitor, laptop, dock, headset, keyboard, mouse); unmapped item.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0198",
+      "employee_id": "E-1010",
+      "request": "keyboard",
+      "reason": "The Trace detail states that keyboard assignment A-012 (asset_tag KBD-1010) has no status; cannot count active units toward the cap, which prevents determining if the cap is exceeded.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0199",
+      "employee_id": "E-1001",
+      "request": "laptop and monitor",
+      "reason": "mixed request, cannot score as one item",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0200",
+      "employee_id": "E-1001",
+      "request": "laptop and monitor",
+      "reason": "The Trace detail indicates the request names more than one covered category (monitor, laptop); mixed request, cannot score as one item.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0201",
+      "employee_id": "E-1011",
+      "request": "laptop replacement",
+      "reason": "duplicate identity, do not pick a row",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0202",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "duplicate identity for employee_id E-1011, making it impossible to determine eligibility based on the provided observations.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0203",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "no staff row for employee_id E-9999; identity is unknown, cannot allow or deny",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0204",
+      "employee_id": "E-1002",
+      "request": "GPU",
+      "reason": "The Trace detail states 'GPU' matches no covered category; unmapped item. This means the item is not covered under any policy category for the role 'employee'.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0205",
+      "employee_id": "E-1010",
+      "request": "keyboard",
+      "reason": "The Trace detail states that keyboard assignment A-012 (asset_tag KBD-1010) has no status; cannot count active units toward the cap. This prevents determining if the cap is met.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0206",
+      "employee_id": "E-1001",
+      "request": "laptop and monitor",
+      "reason": "The Trace detail indicates the request names more than one covered category (monitor, laptop); mixed request, cannot score as one item.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0207",
+      "employee_id": "E-1011",
+      "request": "laptop replacement",
+      "reason": "duplicate employee records, ambiguous eligibility",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0208",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "duplicate employee records cause ambiguous eligibility for laptop replacement.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0209",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "max_steps - employee information could not be retrieved, preventing eligibility determination.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0210",
+      "employee_id": "E-1011",
+      "request": "laptop replacement",
+      "reason": "duplicate identity, do not pick a row",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0211",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "The Trace detail indicates 2 staff rows share employee_id E-1011; duplicate identity, do not pick a row. This ambiguity prevents determining the current equipment status and eligibility.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0212",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "Trace detail \"no staff row for employee_id E-9999; identity is unknown, cannot allow or deny\" indicates the employee information is not available.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0213",
+      "employee_id": "E-1002",
+      "request": "GPU",
+      "reason": "The Trace detail indicates 'GPU' matches no covered category (monitor, laptop, dock, headset, keyboard, mouse); unmapped item.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0214",
+      "employee_id": "E-1010",
+      "request": "keyboard",
+      "reason": "keyboard assignment A-012 (asset_tag KBD-1010) has no status; cannot count active units toward the cap",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0215",
+      "employee_id": "E-1001",
+      "request": "laptop and monitor",
+      "reason": "The Trace detail states 'laptop and monitor' names more than one covered category (monitor, laptop); mixed request, cannot score as one item. This means the request involves multiple categories and cannot be evaluated as a single item, leading to null eligibility.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0216",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "The Trace detail indicates 2 staff rows share employee_id E-1011; duplicate identity, do not pick a row. This ambiguity prevents determining the current equipment status and eligibility.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0217",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "Trace detail \"no staff row for employee_id E-9999; identity is unknown, cannot allow or deny\" indicates the employee information is not available.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0218",
+      "employee_id": "E-1002",
+      "request": "GPU",
+      "reason": "The Trace detail indicates 'GPU' matches no covered category (monitor, laptop, dock, headset, keyboard, mouse); unmapped item.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0219",
+      "employee_id": "E-1010",
+      "request": "keyboard",
+      "reason": "keyboard assignment A-012 (asset_tag KBD-1010) has no status; cannot count active units toward the cap",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0220",
+      "employee_id": "E-1001",
+      "request": "laptop and monitor",
+      "reason": "The Trace detail states 'laptop and monitor' names more than one covered category (monitor, laptop); mixed request, cannot score as one item. This means the request involves multiple categories and cannot be evaluated as a single item, leading to null eligibility.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0221",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "The Trace detail indicates 2 staff rows share employee_id E-1011; duplicate identity, do not pick a row. This ambiguity prevents determining the current equipment status and eligibility.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0222",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "Trace detail \"no staff row for employee_id E-9999; identity is unknown, cannot allow or deny\" indicates the employee information is not available.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0223",
+      "employee_id": "E-1002",
+      "request": "GPU",
+      "reason": "The Trace detail indicates 'GPU' matches no covered category (monitor, laptop, dock, headset, keyboard, mouse); unmapped item.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0224",
+      "employee_id": "E-1010",
+      "request": "keyboard",
+      "reason": "keyboard assignment A-012 (asset_tag KBD-1010) has no status; cannot count active units toward the cap",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0225",
+      "employee_id": "E-1000",
+      "request": "d",
+      "reason": "no staff row for employee_id E-1000; identity is unknown, cannot allow or deny",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0226",
+      "employee_id": "E-1001",
+      "request": "laptop and monitor",
+      "reason": "The Trace detail states 'laptop and monitor' names more than one covered category (monitor, laptop); mixed request, cannot score as one item. This means the request involves multiple categories and cannot be evaluated as a single item, leading to null eligibility.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0227",
+      "employee_id": "E-1000",
+      "request": "d",
+      "reason": "no staff row for employee_id E-1000; identity is unknown, cannot allow or deny",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0228",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "The Trace detail indicates 2 staff rows share employee_id E-1011; duplicate identity, do not pick a row. This ambiguity prevents determining the current equipment status and eligibility.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0229",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "Trace detail \"no staff row for employee_id E-9999; identity is unknown, cannot allow or deny\" indicates the employee information is not available.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0230",
+      "employee_id": "E-1002",
+      "request": "GPU",
+      "reason": "The Trace detail indicates \"GPU\" matches no covered category; this means the item is not supported by the policy limits for the role \"employee\".",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0231",
+      "employee_id": "E-1010",
+      "request": "keyboard",
+      "reason": "keyboard assignment A-012 (asset_tag KBD-1010) has no status; cannot count active units toward the cap",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0232",
+      "employee_id": "E-1001",
+      "request": "laptop and monitor",
+      "reason": "The Trace detail states 'laptop and monitor' names more than one covered category (monitor, laptop); mixed request, cannot score as one item. This means the request involves multiple categories and cannot be evaluated as a single item, leading to null eligibility.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0233",
+      "employee_id": "E-1011",
+      "request": "laptop",
+      "reason": "The Trace detail indicates 2 staff rows share employee_id E-1011; duplicate identity, do not pick a row, leading to an ambiguous eligibility determination.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0234",
+      "employee_id": "E-9999",
+      "request": "laptop",
+      "reason": "Trace detail \"no staff row for employee_id E-9999; identity is unknown, cannot allow or deny\" indicates the employee information is not available.",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0235",
+      "employee_id": "E-1002",
+      "request": "GPU",
+      "reason": "The Trace detail indicates \"GPU\" matches no covered category; this means the item is not supported by the policy limits for the role \"employee\".",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0236",
+      "employee_id": "E-1010",
+      "request": "keyboard",
+      "reason": "keyboard assignment A-012 (asset_tag KBD-1010) has no status; cannot count active units toward the cap",
+      "status": "open"
+    },
+    {
+      "review_ticket_id": "REV-0237",
+      "employee_id": "E-1001",
+      "request": "laptop and monitor",
+      "reason": "The Trace detail states 'laptop and monitor' names more than one covered category (monitor, laptop); mixed request, cannot score as one item. This means the request involves multiple categories and cannot be evaluated as a single item, leading to null eligibility.",
+      "status": "open"
+    }
+  ]
 }
