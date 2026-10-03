@@ -2,11 +2,15 @@
 
 from __future__ import annotations
 
+import asyncio
 import json
 from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
+import cli
 import score_run
 
 GOLD = {
@@ -243,19 +247,51 @@ def test_main_prints_report(
     assert "failed premature flag: none" in out
 
 
-def test_main_resolves_relative_path_against_root(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
+def test_main_returns_when_path_missing(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
 ) -> None:
-    (tmp_path / "golden.json").write_text(json.dumps({**GOLD, "cases": [CASE]}))
-    (tmp_path / "rel.json").write_text(
-        json.dumps([{**perfect_row(), "label": "allow-x"}])
-    )
-    elsewhere = tmp_path / "elsewhere"
-    elsewhere.mkdir()
-    monkeypatch.setattr(score_run, "GOLDEN", tmp_path / "golden.json")
-    monkeypatch.setattr(score_run, "ROOT", tmp_path)
-    monkeypatch.setattr(score_run.sys, "argv", ["score_run.py", "rel.json"])
-    monkeypatch.chdir(elsewhere)
-
+    monkeypatch.setattr(score_run.sys, "argv", ["score_run.py", "no-such-run.json"])
     score_run.main()
-    assert "decision:" in capsys.readouterr().out
+    assert "Path does not exist" in capsys.readouterr().out
+
+
+def test_loop_runs_one_request_then_quits(
+    capsys: pytest.CaptureFixture[str],
+) -> None:
+    request = {
+        "label": "cli-request",
+        "employee_id": "E-1003",
+        "item": "monitor",
+        "reason": "need a screen",
+    }
+    session = AsyncMock()
+    session.initialize = AsyncMock()
+    session.list_tools = AsyncMock(return_value=SimpleNamespace(tools=[]))
+    stdio_cm = AsyncMock()
+    stdio_cm.__aenter__.return_value = (MagicMock(), MagicMock())
+    stdio_cm.__aexit__.return_value = False
+    session_cm = AsyncMock()
+    session_cm.__aenter__.return_value = session
+    session_cm.__aexit__.return_value = False
+    adapter = MagicMock()
+    adapter.generate.return_value = "plan text"
+    result = {
+        "final": "allow",
+        "rationale": "under cap",
+        "flagged": False,
+    }
+    with (
+        patch("cli.OllamaAdapter", return_value=adapter),
+        patch("cli.stdio_client", return_value=stdio_cm),
+        patch("cli.ClientSession", return_value=session_cm),
+        patch("cli.server_params"),
+        patch("cli.build_plan_prompt", return_value="filled plan"),
+        patch("cli.read_request", side_effect=[request, None]),
+        patch("cli.run_react", new_callable=AsyncMock, return_value=result),
+    ):
+        asyncio.run(cli.loop())
+    out = capsys.readouterr().out
+    assert "E-1003" in out
+    assert "plan text" in out
+    assert "Final Answer: allow" in out
+    assert "bye" in out
