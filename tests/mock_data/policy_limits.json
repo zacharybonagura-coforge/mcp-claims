@@ -1,0 +1,65 @@
+{
+    "limits": [
+      {
+        "role": "employee",
+        "category": "monitor",
+        "cap_active": 1,
+        "refresh_years": 3,
+        "policy_rule": "R-EMP-MON"
+      },
+      {
+        "role": "employee",
+        "category": "monitor",
+        "cap_active": 1,
+        "refresh_years": 3,
+        "policy_rule": "R-EMP-MON-DUP"
+      },
+      {
+        "role": "employee",
+        "category": "laptop",
+        "cap_active": 1,
+        "refresh_years": 4,
+        "policy_rule": "R-EMP-LAP"
+      },
+      {
+        "role": "employee",
+        "category": "keyboard",
+        "cap_active": 1
+      },
+      {
+        "role": "employee",
+        "category": "gpu",
+        "cap_active": 1,
+        "refresh_years": 2,
+        "policy_rule": "R-EMP-GPU"
+      },
+      {
+        "role": "manager",
+        "category": "monitor",
+        "cap_active": 2,
+        "refresh_years": 3,
+        "policy_rule": "R-MGR-MON"
+      },
+      {
+        "role": "manager",
+        "category": "laptop",
+        "cap_active": 1,
+        "refresh_years": 2,
+        "policy_rule": "R-MGR-LAP"
+      },
+      {
+        "role": "intern",
+        "category": "headset",
+        "cap_active": 1,
+        "refresh_years": 2,
+        "policy_rule": "R-INT-HEAD"
+      },
+      {
+        "role": "Employee",
+        "category": "mouse",
+        "cap_active": 1,
+        "refresh_years": 2,
+        "policy_rule": "R-EMP-MOU-CASE"
+      }
+    ]
+  }

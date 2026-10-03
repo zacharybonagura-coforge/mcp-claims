@@ -1,0 +1,81 @@
+{
+  "assignments": [
+    {
+      "assignment_id": "A-1",
+      "employee_id": "E-1",
+      "category": "monitor",
+      "status": "active",
+      "assigned_on": "2025-01-10",
+      "asset_tag": "MON-1"
+    },
+    {
+      "assignment_id": "A-2",
+      "employee_id": "E-1",
+      "category": "laptop",
+      "status": "active",
+      "assigned_on": "2024-03-01",
+      "asset_tag": "LAP-1"
+    },
+    {
+      "assignment_id": "A-3",
+      "employee_id": "E-INCOMPLETE",
+      "category": "laptop",
+      "status": "active",
+      "asset_tag": "LAP-X"
+    },
+    {
+      "assignment_id": "A-4",
+      "employee_id": "E-INCOMPLETE",
+      "category": "keyboard",
+      "assigned_on": "2022-01-01",
+      "asset_tag": "KBD-X"
+    },
+    {
+      "assignment_id": "A-5",
+      "employee_id": "E-REFRESH",
+      "category": "laptop",
+      "status": "active",
+      "assigned_on": "2018-03-01",
+      "asset_tag": "LAP-OLD"
+    },
+    {
+      "assignment_id": "A-6",
+      "employee_id": "E-REFRESH",
+      "category": "laptop",
+      "status": "active",
+      "assigned_on": "2025-01-01",
+      "asset_tag": "LAP-NEWER"
+    },
+    {
+      "assignment_id": "A-7",
+      "employee_id": "E-RETIRED",
+      "category": "monitor",
+      "status": "retired",
+      "assigned_on": "2021-09-15",
+      "asset_tag": "MON-RET"
+    },
+    {
+      "assignment_id": "A-8",
+      "employee_id": "E-KBD",
+      "category": "keyboard",
+      "status": "active",
+      "assigned_on": "2018-01-01",
+      "asset_tag": "KBD-1"
+    },
+    {
+      "assignment_id": "A-9",
+      "employee_id": "E-SKIP-DATE",
+      "category": "monitor",
+      "status": "active",
+      "assigned_on": "2025-01-10",
+      "asset_tag": "MON-DATED"
+    },
+    {
+      "assignment_id": "A-10",
+      "employee_id": "E-SKIP-DATE",
+      "category": "monitor",
+      "status": "retired",
+      "asset_tag": "MON-NODATE"
+    }
+  ]
+}

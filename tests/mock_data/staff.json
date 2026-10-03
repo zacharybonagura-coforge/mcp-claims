@@ -1,0 +1,74 @@
+{
+  "staff": [
+    {
+      "employee_id": "E-1",
+      "name": "Ada",
+      "role": "employee",
+      "hire_date": "2022-03-01",
+      "department": "Engineering"
+    },
+    {
+      "employee_id": "E-2",
+      "name": "Bea",
+      "role": "manager",
+      "hire_date": "2026-08-15",
+      "department": "Product"
+    },
+    {
+      "employee_id": "E-DUP",
+      "name": "Casey",
+      "role": "employee",
+      "hire_date": "2021-01-08",
+      "department": "HR"
+    },
+    {
+      "employee_id": "E-DUP",
+      "name": "Casey (duplicate)",
+      "role": "employee",
+      "hire_date": "2021-01-08",
+      "department": "HR"
+    },
+    {
+      "employee_id": "E-INCOMPLETE",
+      "name": "Riley",
+      "role": "employee",
+      "hire_date": "2020-11-02",
+      "department": "Design"
+    },
+    {
+      "employee_id": "E-CONTRACTOR",
+      "name": "Morgan",
+      "role": "contractor",
+      "hire_date": "2024-02-01",
+      "department": "Engineering"
+    },
+    {
+      "employee_id": "E-REFRESH",
+      "name": "Old Kit",
+      "role": "employee",
+      "hire_date": "2015-01-01",
+      "department": "Engineering"
+    },
+    {
+      "employee_id": "E-RETIRED",
+      "name": "Pat",
+      "role": "employee",
+      "hire_date": "2020-01-01",
+      "department": "Support"
+    },
+    {
+      "employee_id": "E-KBD",
+      "name": "Kim",
+      "role": "employee",
+      "hire_date": "2021-01-01",
+      "department": "Design"
+    },
+    {
+      "employee_id": "E-SKIP-DATE",
+      "name": "Lee",
+      "role": "employee",
+      "hire_date": "2020-01-01",
+      "department": "Support"
+    }
+  ]
+}

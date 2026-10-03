@@ -1,0 +1,88 @@
+{
+  "limits": [
+    {
+      "role": "employee",
+      "category": "monitor",
+      "cap_active": 1,
+      "refresh_years": 3,
+      "policy_rule": "R-EMP-MON"
+    },
+    {
+      "role": "employee",
+      "category": "laptop",
+      "cap_active": 1,
+      "refresh_years": 4,
+      "policy_rule": "R-EMP-LAP"
+    },
+    {
+      "role": "employee",
+      "category": "dock",
+      "cap_active": 1,
+      "refresh_years": 4,
+      "policy_rule": "R-EMP-DOCK"
+    },
+    {
+      "role": "employee",
+      "category": "headset",
+      "cap_active": 1,
+      "refresh_years": 2,
+      "policy_rule": "R-EMP-HEAD"
+    },
+    {
+      "role": "employee",
+      "category": "keyboard",
+      "cap_active": 1,
+      "refresh_years": 2,
+      "policy_rule": "R-EMP-KBD"
+    },
+    {
+      "role": "employee",
+      "category": "mouse",
+      "cap_active": 1,
+      "refresh_years": 2,
+      "policy_rule": "R-EMP-MOU"
+    },
+    {
+      "role": "manager",
+      "category": "monitor",
+      "cap_active": 2,
+      "refresh_years": 3,
+      "policy_rule": "R-MGR-MON"
+    },
+    {
+      "role": "manager",
+      "category": "laptop",
+      "cap_active": 1,
+      "refresh_years": 2,
+      "policy_rule": "R-MGR-LAP"
+    },
+    {
+      "role": "manager",
+      "category": "dock",
+      "cap_active": 1,
+      "refresh_years": 4,
+      "policy_rule": "R-MGR-DOCK"
+    },
+    {
+      "role": "manager",
+      "category": "headset",
+      "cap_active": 1,
+      "refresh_years": 2,
+      "policy_rule": "R-MGR-HEAD"
+    },
+    {
+      "role": "manager",
+      "category": "keyboard",
+      "cap_active": 1,
+      "refresh_years": 2,
+      "policy_rule": "R-MGR-KBD"
+    },
+    {
+      "role": "manager",
+      "category": "mouse",
+      "cap_active": 1,
+      "refresh_years": 2,
+      "policy_rule": "R-MGR-MOU"
+    }
+  ]
+}
