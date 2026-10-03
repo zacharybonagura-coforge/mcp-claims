@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+import os
 
 import httpx
 import pytest
@@ -37,7 +38,10 @@ def _ollama_up() -> bool:
 @pytest.fixture(scope="module")
 def scored(tmp_path_factory) -> dict:
     if not _ollama_up():
-        pytest.skip(f"Ollama is not reachable at {OLLAMA}")
+        message = f"Ollama is not reachable at {OLLAMA}"
+        if os.environ.get("CI"):
+            pytest.fail(message)
+        pytest.skip(message)
     out = tmp_path_factory.mktemp("eval-run")
     previous = host.RUNS
     host.RUNS = out
